@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>DimeX Staking</title>
+
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
 
 <style>
 body{
@@ -14,39 +16,47 @@ text-align:center;
 }
 header{
 padding:20px;
-font-size:28px;
+font-size:30px;
 color:gold;
 }
 button{
-padding:14px 28px;
+padding:15px 25px;
+margin:10px;
 background:gold;
 border:none;
-font-size:18px;
 border-radius:8px;
-margin:10px;
+font-size:16px;
 }
 .card{
 background:#111;
-margin:20px;
+margin:20px auto;
 padding:20px;
 border-radius:12px;
+max-width:420px;
+}
+input{
+padding:10px;
+width:80%;
 }
 </style>
 </head>
 
 <body>
 
-<header>DimeX (DX) Staking Dashboard</header>
+<header>DimeX (DX) Staking</header>
 
-<button onclick="connectWallet()">Connect Wallet</button>
+<h3>Connect Wallet</h3>
 
-<div id="wallet" style="margin-top:20px;color:gold;"></div>
+<button onclick="connectMetaMask()">MetaMask</button>
+<button onclick="connectWalletConnect()">All Wallets</button>
+
+<div id="wallet" style="margin-top:10px;color:gold;"></div>
 
 <div id="dash" style="display:none;">
 
 <div class="card">
-<h3>Stake</h3>
-<input id="amount" placeholder="Enter amount" style="padding:10px;">
+<h3>Stake DX</h3>
+<input id="amount" placeholder="Enter DX amount">
 <br>
 <button onclick="stake()">Stake</button>
 </div>
@@ -66,28 +76,54 @@ border-radius:12px;
 <script>
 let user;
 
-async function connectWallet(){
-if(window.ethereum){
-const provider=new ethers.providers.Web3Provider(window.ethereum);
-await provider.send("eth_requestAccounts",[]);
-const signer=provider.getSigner();
-user=await signer.getAddress();
+async function connectMetaMask(){
 
-document.getElementById("wallet").innerHTML="Connected: "+user;
+if(window.ethereum){
+
+const accounts = await window.ethereum.request({
+method: "eth_requestAccounts"
+});
+
+user = accounts[0];
+
+document.getElementById("wallet").innerHTML =
+"Connected: " + user;
+
 document.getElementById("dash").style.display="block";
+
 }else{
-alert("Open inside MetaMask browser");
+alert("Open inside MetaMask");
 }
+
+}
+
+async function connectWalletConnect(){
+
+const provider = new WalletConnectProvider.default({
+rpc:{56:"https://bsc-dataseed.binance.org/"}
+});
+
+await provider.enable();
+
+const web3Provider = new ethers.providers.Web3Provider(provider);
+const signer = web3Provider.getSigner();
+user = await signer.getAddress();
+
+document.getElementById("wallet").innerHTML =
+"Connected: " + user;
+
+document.getElementById("dash").style.display="block";
+
 }
 
 function stake(){
 let amt=document.getElementById("amount").value;
-document.getElementById("staked").innerHTML=amt+" DX";
-alert("Demo staking only");
+document.getElementById("staked").innerHTML = amt + " DX";
+alert("Demo staking");
 }
 
 function claim(){
-alert("Reward claimed (demo)");
+alert("Rewards claimed");
 }
 </script>
 
