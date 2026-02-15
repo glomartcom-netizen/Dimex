@@ -5,7 +5,6 @@
 <title>DimeX</title>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
-
 <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.11.0/dist/index.umd.js"></script>
 
 <style>
@@ -28,6 +27,17 @@ font-size:18px;
 border-radius:10px;
 margin:10px;
 }
+.card{
+background:#111;
+margin:20px auto;
+padding:20px;
+border-radius:12px;
+max-width:400px;
+}
+input{
+padding:10px;
+width:80%;
+}
 </style>
 </head>
 
@@ -39,6 +49,20 @@ margin:10px;
 <button onclick="connectAll()">All Wallets</button>
 
 <div id="wallet" style="color:gold;margin-top:10px;"></div>
+
+<div id="dash" style="display:none;">
+<div class="card">
+<h3>Stake DX</h3>
+<input id="amt" placeholder="Amount">
+<br><br>
+<button onclick="stake()">STAKE</button>
+</div>
+
+<div class="card">
+<h3>Your Stake</h3>
+<p id="staked">0 DX</p>
+</div>
+</div>
 
 <script>
 
@@ -85,8 +109,17 @@ show(user);
 }
 
 function show(addr){
+
 document.getElementById("wallet").innerHTML =
 "Connected: " + addr;
+
+document.getElementById("dash").style.display="block";
+
+}
+
+function stake(){
+let amt=document.getElementById("amt").value;
+document.getElementById("staked").innerHTML = amt + " DX";
 }
 
 </script>
