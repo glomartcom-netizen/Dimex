@@ -3,41 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <title>DimeX</title>
+
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
 
 <style>
 body{background:#000;color:#fff;text-align:center;font-family:Arial}
-button{padding:16px 30px;background:gold;border:none;font-size:18px;margin-top:40px;border-radius:10px}
+button{
+padding:16px 30px;
+background:gold;
+border:none;
+font-size:18px;
+border-radius:10px;
+margin:10px;
+}
+header{
+font-size:28px;
+padding:20px;
+color:gold;
+}
+.card{
+background:#111;
+padding:20px;
+margin:20px auto;
+border-radius:12px;
+max-width:400px;
+}
 </style>
 </head>
 
 <body>
 
-<h2>DimeX Wallet Connect</h2>
+<header>DimeX (DX)</header>
 
-<button onclick="connect()">CONNECT WALLET</button>
+<button onclick="connectMetaMask()">MetaMask</button>
+<button onclick="connectAll()">Other Wallets</button>
 
-<h3 id="addr"></h3>
+<div id="wallet" style="margin-top:10px;color:gold;"></div>
+
+<div id="dash" style="display:none;">
+<div class="card">
+<h3>Dashboard</h3>
+<p>Wallet connected</p>
+</div>
+</div>
 
 <script>
 
-async function connect(){
+let user;
 
-if(typeof window.ethereum === 'undefined'){
-alert("Open inside MetaMask browser");
-return;
+async function connectMetaMask(){
+
+if(window.ethereum){
+
+const accounts = await window.ethereum.request({
+method: "eth_requestAccounts"
+});
+
+user = accounts[0];
+show(user);
+
+}else{
+
+const dapp = window.location.href.replace("https://","");
+window.location.href =
+"https://metamask.app.link/dapp/" + dapp;
+
 }
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
+}
 
-await provider.send("eth_requestAccounts", []);
+async function connectAll(){
 
-const signer = provider.getSigner();
-const address = await signer.getAddress();
+const provider = new WalletConnectProvider.default({
+rpc:{56:"https://bsc-dataseed.binance.org/"}
+});
 
-document.getElementById("addr").innerHTML =
-"Connected: " + address;
+await provider.enable();
 
+const web3 = new ethers.providers.Web3Provider(provider);
+const signer = web3.getSigner();
+user = await signer.getAddress();
+
+show(user);
+
+}
+
+function show(addr){
+document.getElementById("wallet").innerHTML =
+"Connected: " + addr;
+
+document.getElementById("dash").style.display="block";
 }
 
 </script>
