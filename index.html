@@ -3,108 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <title>DimeX</title>
-
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
-<script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
 
 <style>
-body{
-background:#000;
-color:#fff;
-font-family:Arial;
-text-align:center;
-}
-header{
-padding:20px;
-font-size:28px;
-color:gold;
-}
-button{
-padding:16px 30px;
-background:gold;
-border:none;
-font-size:18px;
-border-radius:10px;
-margin:10px;
-}
-.card{
-background:#111;
-margin:20px auto;
-padding:20px;
-border-radius:12px;
-max-width:400px;
-}
+body{background:#000;color:#fff;text-align:center;font-family:Arial}
+button{padding:16px 30px;background:gold;border:none;font-size:18px;margin-top:40px;border-radius:10px}
 </style>
 </head>
 
 <body>
 
-<header>DimeX (DX)</header>
+<h2>DimeX Wallet Connect</h2>
 
-<button onclick="connectMetaMask()">MetaMask</button>
-<button onclick="connectWC()">All Wallets</button>
+<button onclick="connect()">CONNECT WALLET</button>
 
-<div id="wallet" style="color:gold;margin-top:10px;"></div>
+<h3 id="addr"></h3>
 
 <script>
 
-let provider;
+async function connect(){
 
-async function connectMetaMask(){
+if(typeof window.ethereum === 'undefined'){
+alert("Open inside MetaMask browser");
+return;
+}
 
-if(window.ethereum){
-
-provider = new ethers.providers.Web3Provider(window.ethereum);
+const provider = new ethers.providers.Web3Provider(window.ethereum);
 
 await provider.send("eth_requestAccounts", []);
 
 const signer = provider.getSigner();
 const address = await signer.getAddress();
 
-localStorage.setItem("wallet", address);
-
-showAddress(address);
-
-}else{
-
-// open metamask app
-const url = window.location.href.replace("https://","");
-window.location.href = "https://metamask.app.link/dapp/" + url;
-
-}
-
-}
-
-async function connectWC(){
-
-const wc = new WalletConnectProvider.default({
-rpc:{56:"https://bsc-dataseed.binance.org/"}
-});
-
-await wc.enable();
-
-provider = new ethers.providers.Web3Provider(wc);
-
-const signer = provider.getSigner();
-const address = await signer.getAddress();
-
-localStorage.setItem("wallet", address);
-
-showAddress(address);
-
-}
-
-function showAddress(addr){
-document.getElementById("wallet").innerHTML =
-"Connected: " + addr;
-}
-
-window.onload = function(){
-
-const saved = localStorage.getItem("wallet");
-if(saved){
-showAddress(saved);
-}
+document.getElementById("addr").innerHTML =
+"Connected: " + address;
 
 }
 
