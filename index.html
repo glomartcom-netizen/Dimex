@@ -9,23 +9,28 @@
 
 <style>
 body{background:#000;color:#fff;text-align:center;font-family:Arial}
-button{padding:16px 30px;background:gold;border:none;font-size:18px;margin:10px;border-radius:10px}
+button{padding:16px 28px;background:gold;border:none;font-size:18px;margin:8px;border-radius:10px}
 </style>
 </head>
 
 <body>
 
-<h2>DimeX</h2>
+<h2>DimeX Wallet</h2>
 
-<button onclick="meta()">MetaMask</button>
-<button onclick="trust()">Trust Wallet</button>
-<button onclick="walletconnect()">All Wallets</button>
+<button onclick="connectMetaMask()">MetaMask</button>
+<button onclick="openTrust()">Trust Wallet</button>
+<button onclick="connectAll()">Other Wallets</button>
 
 <div id="addr" style="margin-top:20px;color:gold"></div>
 
 <script>
 
-async function meta(){
+function show(a){
+document.getElementById("addr").innerHTML="Connected: "+a;
+}
+
+// 🔵 MetaMask
+async function connectMetaMask(){
 
 if(window.ethereum){
 
@@ -33,24 +38,26 @@ const provider=new ethers.providers.Web3Provider(window.ethereum);
 await provider.send("eth_requestAccounts",[]);
 const signer=provider.getSigner();
 const address=await signer.getAddress();
-
 show(address);
 
 }else{
 
-const dapp=window.location.href.replace("https://","");
+const dapp=location.href.replace("https://","");
 window.location.href="https://metamask.app.link/dapp/"+dapp;
 
 }
 
 }
 
-function trust(){
-const dapp=window.location.href.replace("https://","");
-window.location.href="https://link.trustwallet.com/open_url?coin_id=56&url=https://"+dapp;
+// 🟡 Trust wallet deep link
+function openTrust(){
+const dapp=location.href.replace("https://","");
+window.location.href=
+"https://link.trustwallet.com/open_url?coin_id=56&url=https://"+dapp;
 }
 
-async function walletconnect(){
+// 🟢 WalletConnect all wallets
+async function connectAll(){
 
 const provider=await window.EthereumProvider.init({
 projectId:"62a73933d62534edcd2f54b8a06c4319",
@@ -65,14 +72,8 @@ const signer=web3.getSigner();
 const address=await signer.getAddress();
 
 show(address);
-
-}
-
-function show(a){
-document.getElementById("addr").innerHTML="Connected: "+a;
 }
 
 </script>
-
 </body>
 </html>
