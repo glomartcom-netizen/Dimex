@@ -34,10 +34,6 @@ padding:20px;
 border-radius:12px;
 max-width:400px;
 }
-input{
-padding:10px;
-width:80%;
-}
 </style>
 </head>
 
@@ -46,29 +42,15 @@ width:80%;
 <header>DimeX (DX)</header>
 
 <button onclick="connectMetaMask()">MetaMask</button>
-<button onclick="connectWalletConnect()">Other Wallets</button>
+<button onclick="connectWC()">All Wallets</button>
 
 <div id="wallet" style="color:gold;margin-top:10px;"></div>
 
 <div id="dash" style="display:none;">
-
 <div class="card">
-<h3>Stake DX</h3>
-<input id="amt" placeholder="Amount">
-<br><br>
-<button onclick="stake()">STAKE</button>
+<h3>Wallet Connected</h3>
+<p id="address"></p>
 </div>
-
-<div class="card">
-<h3>Your Stake</h3>
-<p id="staked">0 DX</p>
-</div>
-
-<div class="card">
-<h3>Rewards</h3>
-<button onclick="claim()">CLAIM</button>
-</div>
-
 </div>
 
 <script>
@@ -79,16 +61,13 @@ async function connectMetaMask(){
 
 if(window.ethereum){
 
-const accounts = await window.ethereum.request({
-method: "eth_requestAccounts"
-});
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+await provider.send("eth_requestAccounts", []);
 
-user = accounts[0];
+const signer = provider.getSigner();
+user = await signer.getAddress();
 
-document.getElementById("wallet").innerHTML =
-"Connected: " + user;
-
-document.getElementById("dash").style.display="block";
+showUser(user);
 
 }else{
 
@@ -100,7 +79,7 @@ window.location.href =
 
 }
 
-async function connectWalletConnect(){
+async function connectWC(){
 
 const provider = new WalletConnectProvider.default({
 rpc:{56:"https://bsc-dataseed.binance.org/"}
@@ -113,21 +92,19 @@ const signer = web3Provider.getSigner();
 
 user = await signer.getAddress();
 
+showUser(user);
+
+}
+
+function showUser(addr){
+
 document.getElementById("wallet").innerHTML =
-"Connected: " + user;
+"Connected: " + addr;
+
+document.getElementById("address").innerHTML = addr;
 
 document.getElementById("dash").style.display="block";
 
-}
-
-function stake(){
-let amt=document.getElementById("amt").value;
-document.getElementById("staked").innerHTML = amt + " DX";
-alert("Demo stake success");
-}
-
-function claim(){
-alert("Reward claimed (demo)");
 }
 
 </script>
