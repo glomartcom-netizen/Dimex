@@ -3,64 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <title>DimeX</title>
-
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
-<script src="https://unpkg.com/@walletconnect/ethereum-provider@2.11.0/dist/index.umd.js"></script>
 
 <style>
 body{background:#000;color:#fff;text-align:center;font-family:Arial}
-button{padding:16px 28px;background:gold;border:none;font-size:18px;margin:8px;border-radius:10px}
+button{padding:16px 30px;background:gold;border:none;font-size:18px;margin-top:40px;border-radius:10px}
 </style>
 </head>
 
 <body>
 
-<h2>DimeX Wallet</h2>
+<h2>DimeX Connect</h2>
 
-<button onclick="meta()">MetaMask</button>
-<button onclick="trust()">Trust Wallet</button>
-<button onclick="other()">Other Wallets</button>
+<button onclick="connect()">CONNECT WALLET</button>
 
-<div id="addr" style="margin-top:20px;color:gold"></div>
+<h3 id="addr"></h3>
 
 <script>
 
-function show(a){
-document.getElementById("addr").innerHTML="Connected: "+a;
-}
+async function connect(){
 
-async function meta(){
+// If inside MetaMask
 if(window.ethereum){
-const provider=new ethers.providers.Web3Provider(window.ethereum);
-await provider.send("eth_requestAccounts",[]);
-const signer=provider.getSigner();
-const address=await signer.getAddress();
-show(address);
+
+try{
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+await provider.send("eth_requestAccounts", []);
+
+const signer = provider.getSigner();
+const address = await signer.getAddress();
+
+document.getElementById("addr").innerHTML =
+"Connected: " + address;
+
+}catch(e){
+alert("User rejected or network error");
+}
+
 }else{
-const dapp=location.href.replace("https://","");
-window.location.href="https://metamask.app.link/dapp/"+dapp;
-}
+
+// open MetaMask app
+const dapp = window.location.href.replace("https://","");
+window.location.href =
+"https://metamask.app.link/dapp/" + dapp;
+
 }
 
-function trust(){
-const dapp=location.href.replace("https://","");
-window.location.href=
-"https://link.trustwallet.com/open_url?coin_id=56&url=https://"+dapp;
-}
-
-async function other(){
-const provider=await window.EthereumProvider.init({
-projectId:"62a73933d62534edcd2f54b8a06c4319",
-chains:[56],
-showQrModal:true
-});
-await provider.connect();
-const web3=new ethers.providers.Web3Provider(provider);
-const signer=web3.getSigner();
-const address=await signer.getAddress();
-show(address);
 }
 
 </script>
+
 </body>
 </html>
