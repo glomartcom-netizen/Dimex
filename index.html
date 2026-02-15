@@ -17,9 +17,9 @@ button{padding:16px 28px;background:gold;border:none;font-size:18px;margin:8px;b
 
 <h2>DimeX Wallet</h2>
 
-<button onclick="connectMetaMask()">MetaMask</button>
-<button onclick="openTrust()">Trust Wallet</button>
-<button onclick="connectAll()">Other Wallets</button>
+<button onclick="meta()">MetaMask</button>
+<button onclick="trust()">Trust Wallet</button>
+<button onclick="other()">Other Wallets</button>
 
 <div id="addr" style="margin-top:20px;color:gold"></div>
 
@@ -29,48 +29,35 @@ function show(a){
 document.getElementById("addr").innerHTML="Connected: "+a;
 }
 
-// 🔵 MetaMask
-async function connectMetaMask(){
-
+async function meta(){
 if(window.ethereum){
-
 const provider=new ethers.providers.Web3Provider(window.ethereum);
 await provider.send("eth_requestAccounts",[]);
 const signer=provider.getSigner();
 const address=await signer.getAddress();
 show(address);
-
 }else{
-
 const dapp=location.href.replace("https://","");
 window.location.href="https://metamask.app.link/dapp/"+dapp;
-
+}
 }
 
-}
-
-// 🟡 Trust wallet deep link
-function openTrust(){
+function trust(){
 const dapp=location.href.replace("https://","");
 window.location.href=
 "https://link.trustwallet.com/open_url?coin_id=56&url=https://"+dapp;
 }
 
-// 🟢 WalletConnect all wallets
-async function connectAll(){
-
+async function other(){
 const provider=await window.EthereumProvider.init({
 projectId:"62a73933d62534edcd2f54b8a06c4319",
 chains:[56],
 showQrModal:true
 });
-
 await provider.connect();
-
 const web3=new ethers.providers.Web3Provider(provider);
 const signer=web3.getSigner();
 const address=await signer.getAddress();
-
 show(address);
 }
 
