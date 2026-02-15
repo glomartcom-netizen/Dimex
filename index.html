@@ -8,24 +8,49 @@
 <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
 
 <style>
-body{background:#000;color:#fff;font-family:Arial;text-align:center}
-header{font-size:28px;color:gold;padding:20px}
-button{padding:14px 25px;background:gold;border:none;border-radius:8px;margin:8px}
-.card{background:#111;padding:20px;margin:20px auto;border-radius:12px;max-width:420px}
-input{padding:10px;width:70%}
+body{
+background:#000;
+color:#fff;
+font-family:Arial;
+text-align:center;
+}
+header{
+padding:20px;
+font-size:28px;
+color:gold;
+}
+button{
+padding:16px 30px;
+background:gold;
+border:none;
+font-size:18px;
+border-radius:10px;
+margin:10px;
+}
+.card{
+background:#111;
+margin:20px auto;
+padding:20px;
+border-radius:12px;
+max-width:400px;
+}
+input{
+padding:10px;
+width:80%;
+}
 </style>
 </head>
 
 <body>
 
-<header>DimeX Dashboard</header>
+<header>DimeX (DX)</header>
 
 <button onclick="connectMetaMask()">MetaMask</button>
 <button onclick="connectWalletConnect()">Other Wallets</button>
 
-<div id="wallet" style="color:gold;margin-top:10px"></div>
+<div id="wallet" style="color:gold;margin-top:10px;"></div>
 
-<div id="dash" style="display:none">
+<div id="dash" style="display:none;">
 
 <div class="card">
 <h3>Stake DX</h3>
@@ -35,13 +60,12 @@ input{padding:10px;width:70%}
 </div>
 
 <div class="card">
-<h3>Your Staked</h3>
+<h3>Your Stake</h3>
 <p id="staked">0 DX</p>
 </div>
 
 <div class="card">
 <h3>Rewards</h3>
-<p id="reward">0 DX</p>
 <button onclick="claim()">CLAIM</button>
 </div>
 
@@ -56,11 +80,15 @@ async function connectMetaMask(){
 if(window.ethereum){
 
 const accounts = await window.ethereum.request({
-method:"eth_requestAccounts"
+method: "eth_requestAccounts"
 });
 
 user = accounts[0];
-show(user);
+
+document.getElementById("wallet").innerHTML =
+"Connected: " + user;
+
+document.getElementById("dash").style.display="block";
 
 }else{
 
@@ -80,18 +108,13 @@ rpc:{56:"https://bsc-dataseed.binance.org/"}
 
 await provider.enable();
 
-const web3 = new ethers.providers.Web3Provider(provider);
-const signer = web3.getSigner();
+const web3Provider = new ethers.providers.Web3Provider(provider);
+const signer = web3Provider.getSigner();
+
 user = await signer.getAddress();
 
-show(user);
-
-}
-
-function show(addr){
-
 document.getElementById("wallet").innerHTML =
-"Connected: " + addr;
+"Connected: " + user;
 
 document.getElementById("dash").style.display="block";
 
@@ -99,12 +122,12 @@ document.getElementById("dash").style.display="block";
 
 function stake(){
 let amt=document.getElementById("amt").value;
-document.getElementById("staked").innerHTML=amt+" DX";
-document.getElementById("reward").innerHTML=(amt*0.01)+" DX";
+document.getElementById("staked").innerHTML = amt + " DX";
+alert("Demo stake success");
 }
 
 function claim(){
-alert("Rewards claimed (demo)");
+alert("Reward claimed (demo)");
 }
 
 </script>
