@@ -8,44 +8,56 @@
 <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
 
 <style>
-body{background:#000;color:#fff;text-align:center;font-family:Arial}
+body{background:#000;color:#fff;font-family:Arial;text-align:center}
+header{font-size:28px;color:gold;padding:20px}
 button{
-padding:16px 30px;
+padding:15px 25px;
 background:gold;
 border:none;
-font-size:18px;
-border-radius:10px;
+border-radius:8px;
 margin:10px;
-}
-header{
-font-size:28px;
-padding:20px;
-color:gold;
+font-size:16px;
 }
 .card{
 background:#111;
 padding:20px;
 margin:20px auto;
 border-radius:12px;
-max-width:400px;
+max-width:420px;
 }
+input{padding:10px;width:70%}
 </style>
 </head>
 
 <body>
 
-<header>DimeX (DX)</header>
+<header>DimeX Staking</header>
 
 <button onclick="connectMetaMask()">MetaMask</button>
 <button onclick="connectAll()">Other Wallets</button>
 
-<div id="wallet" style="margin-top:10px;color:gold;"></div>
+<div id="addr" style="color:gold;margin-top:10px"></div>
 
-<div id="dash" style="display:none;">
+<div id="dashboard" style="display:none">
+
 <div class="card">
-<h3>Dashboard</h3>
-<p>Wallet connected</p>
+<h3>Stake DX</h3>
+<input id="amt" placeholder="Amount">
+<br><br>
+<button onclick="stake()">Stake</button>
 </div>
+
+<div class="card">
+<h3>Your Stake</h3>
+<p id="staked">0 DX</p>
+</div>
+
+<div class="card">
+<h3>Rewards</h3>
+<p id="reward">0 DX</p>
+<button onclick="claim()">Claim</button>
+</div>
+
 </div>
 
 <script>
@@ -57,7 +69,7 @@ async function connectMetaMask(){
 if(window.ethereum){
 
 const accounts = await window.ethereum.request({
-method: "eth_requestAccounts"
+method:"eth_requestAccounts"
 });
 
 user = accounts[0];
@@ -90,13 +102,25 @@ show(user);
 }
 
 function show(addr){
-document.getElementById("wallet").innerHTML =
+
+document.getElementById("addr").innerHTML =
 "Connected: " + addr;
 
-document.getElementById("dash").style.display="block";
+document.getElementById("dashboard").style.display="block";
+
+}
+
+function stake(){
+let amt=document.getElementById("amt").value;
+document.getElementById("staked").innerHTML=amt+" DX";
+document.getElementById("reward").innerHTML=(amt*0.01)+" DX";
+}
+
+function claim(){
+alert("Rewards claimed (demo)");
 }
 
 </script>
 
 </body>
-</html>
+      </html>
