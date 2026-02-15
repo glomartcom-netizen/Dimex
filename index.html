@@ -2,143 +2,134 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DimeX Staking Platform</title>
-
+<title>DimeX Staking</title>
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
-<script src="https://unpkg.com/@walletconnect/ethereum-provider@2.11.0/dist/index.umd.js"></script>
 
 <style>
-body{
-background:#000;
-color:#fff;
-font-family:Arial;
-text-align:center;
-}
-header{
-padding:20px;
-font-size:32px;
-color:gold;
-}
-button{
-padding:15px 25px;
-margin:10px;
-background:gold;
-border:none;
-border-radius:8px;
-font-size:16px;
-}
-.card{
-background:#111;
-margin:20px auto;
-padding:20px;
-border-radius:12px;
-max-width:420px;
-}
-input{
-padding:10px;
-width:80%;
-}
+body{background:#000;color:#fff;font-family:Arial;text-align:center}
+header{color:gold;font-size:28px;padding:20px}
+button{padding:14px 25px;margin:10px;background:gold;border:none;border-radius:8px}
+.card{background:#111;padding:20px;margin:20px auto;border-radius:12px;width:350px}
+input{padding:10px;width:80%;margin:10px}
 </style>
 </head>
 
 <body>
 
-<header>DimeX Staking Platform</header>
+<header>DimeX Staking</header>
 
-<button onclick="connectMetaMask()">MetaMask</button>
-<button onclick="connectAll()">All Wallets</button>
+<button onclick="connect()">CONNECT WALLET</button>
+<div id="wallet"></div>
+<div id="status"></div>
 
-<div id="wallet" style="color:gold;margin-top:10px;"></div>
-
-<div id="dash" style="display:none;">
+<div id="app" style="display:none">
 
 <div class="card">
-<h3>USDT Staking</h3>
-<input id="usdt" placeholder="Amount USDT">
-<br><br>
-<button onclick="stakeUSDT()">Stake USDT</button>
+<h3>Stake USDT</h3>
+<input id="usdtAmount" placeholder="Amount">
+
+<button onclick="approveUSDT()">Approve USDT</button>
+<button onclick="stakeUSDT()">Stake</button>
 </div>
 
 <div class="card">
-<h3>DX Staking</h3>
-<input id="dx" placeholder="Amount DX">
-<br><br>
-<button onclick="stakeDX()">Stake DX</button>
+<h3>Stake DX</h3>
+<input id="dxAmount" placeholder="Amount">
+
+<button onclick="approveDX()">Approve DX</button>
+<button onclick="stakeDX()">Stake</button>
 </div>
 
 <div class="card">
-<h3>Claim Rewards</h3>
-<button onclick="claim()">Claim</button>
+<button onclick="claim()">CLAIM REWARD</button>
 </div>
 
 </div>
 
 <script>
 
-let user;
+let provider, signer, staking, usdt, dx;
 
-async function connectMetaMask(){
+const stakingAddress = "PASTE_STAKING_CONTRACT";
+const usdtAddress = "PASTE_USDT";
+const dxAddress   = "PASTE_DX";
 
-if(window.ethereum){
+const stakingABI = [
+ "function stakeUSDT(uint amount,uint plan)",
+ "function stakeDX(uint amount,uint plan)",
+ "function claim()"
+];
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-await provider.send("eth_requestAccounts", []);
+const erc20ABI = [
+ "function approve(address spender,uint amount) external returns(bool)"
+];
 
-const signer = provider.getSigner();
-user = await signer.getAddress();
+async function connect(){
 
-show(user);
-
-}else{
-
-const dapp = window.location.href.replace("https://","");
-window.location.href =
-"https://metamask.app.link/dapp/" + dapp;
-
+if(!window.ethereum){
+alert("Install MetaMask");
+return;
 }
 
+await window.ethereum.request({method:'eth_requestAccounts'});
+
+provider = new ethers.providers.Web3Provider(window.ethereum);
+signer = provider.getSigner();
+
+const net = await provider.getNetwork();
+if(net.chainId !== 56){
+alert("Switch to BSC Mainnet");
+return;
 }
 
-async function connectAll(){
+staking = new ethers.Contract(stakingAddress,stakingABI,signer);
+usdt = new ethers.Contract(usdtAddress,erc20ABI,signer);
+dx   = new ethers.Contract(dxAddress,erc20ABI,signer);
 
-const provider = await window.EthereumProvider.init({
-projectId: "62a73933d62534edcd2f54b8a06c4319",
-chains: [56],
-showQrModal: true
-});
-
-await provider.connect();
-
-const web3Provider = new ethers.providers.Web3Provider(provider);
-const signer = web3Provider.getSigner();
-user = await signer.getAddress();
-
-show(user);
-
+let addr = await signer.getAddress();
+document.getElementById("wallet").innerHTML = addr;
+document.getElementById("app").style.display="block";
 }
 
-function show(addr){
-
-document.getElementById("wallet").innerHTML =
-"Connected: " + addr;
-
-document.getElementById("dash").style.display="block";
-
+async function approveUSDT(){
+let amt = document.getElementById("usdtAmount").value;
+let tx = await usdt.approve(stakingAddress,ethers.utils.parseUnits(amt,18));
+document.getElementById("status").innerHTML="Approving USDT...";
+await tx.wait();
+document.getElementById("status").innerHTML="USDT Approved";
 }
 
-function stakeUSDT(){
-alert("USDT sent to admin wallet:\n0x53ba2d865be750d0e2d4d01bcb0a46ec1684c46b");
+async function approveDX(){
+let amt = document.getElementById("dxAmount").value;
+let tx = await dx.approve(stakingAddress,ethers.utils.parseUnits(amt,18));
+document.getElementById("status").innerHTML="Approving DX...";
+await tx.wait();
+document.getElementById("status").innerHTML="DX Approved";
 }
 
-function stakeDX(){
-alert("DX staking recorded");
+async function stakeUSDT(){
+let amt = document.getElementById("usdtAmount").value;
+let tx = await staking.stakeUSDT(ethers.utils.parseUnits(amt,18),0);
+document.getElementById("status").innerHTML="Staking USDT...";
+await tx.wait();
+document.getElementById("status").innerHTML="USDT Staked";
 }
 
-function claim(){
-alert("Claim rewards");
+async function stakeDX(){
+let amt = document.getElementById("dxAmount").value;
+let tx = await staking.stakeDX(ethers.utils.parseUnits(amt,18),0);
+document.getElementById("status").innerHTML="Staking DX...";
+await tx.wait();
+document.getElementById("status").innerHTML="DX Staked";
+}
+
+async function claim(){
+let tx = await staking.claim();
+document.getElementById("status").innerHTML="Claiming...";
+await tx.wait();
+document.getElementById("status").innerHTML="Reward Claimed";
 }
 
 </script>
-
 </body>
-  </html>
+</html>
