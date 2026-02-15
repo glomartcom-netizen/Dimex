@@ -10,52 +10,39 @@
 <style>
 body{background:#000;color:#fff;font-family:Arial;text-align:center}
 header{font-size:28px;color:gold;padding:20px}
-button{
-padding:15px 25px;
-background:gold;
-border:none;
-border-radius:8px;
-margin:10px;
-font-size:16px;
-}
-.card{
-background:#111;
-padding:20px;
-margin:20px auto;
-border-radius:12px;
-max-width:420px;
-}
+button{padding:14px 25px;background:gold;border:none;border-radius:8px;margin:8px}
+.card{background:#111;padding:20px;margin:20px auto;border-radius:12px;max-width:420px}
 input{padding:10px;width:70%}
 </style>
 </head>
 
 <body>
 
-<header>DimeX Staking</header>
+<header>DimeX Dashboard</header>
 
 <button onclick="connectMetaMask()">MetaMask</button>
-<button onclick="connectAll()">Other Wallets</button>
+<button onclick="connectWalletConnect()">Other Wallets</button>
 
-<div id="addr" style="color:gold;margin-top:10px"></div>
+<div id="wallet" style="color:gold;margin-top:10px"></div>
 
-<div id="dashboard" style="display:none">
+<div id="dash" style="display:none">
 
 <div class="card">
 <h3>Stake DX</h3>
 <input id="amt" placeholder="Amount">
 <br><br>
-<button onclick="stake()">Stake</button>
+<button onclick="stake()">STAKE</button>
 </div>
 
 <div class="card">
-<h3>Your Stake</h3>
+<h3>Your Staked</h3>
 <p id="staked">0 DX</p>
 </div>
 
 <div class="card">
 <h3>Rewards</h3>
 <p id="reward">0 DX</p>
-<button onclick="claim()">Claim</button>
+<button onclick="claim()">CLAIM</button>
 </div>
 
 </div>
@@ -85,7 +72,7 @@ window.location.href =
 
 }
 
-async function connectAll(){
+async function connectWalletConnect(){
 
 const provider = new WalletConnectProvider.default({
 rpc:{56:"https://bsc-dataseed.binance.org/"}
@@ -103,10 +90,10 @@ show(user);
 
 function show(addr){
 
-document.getElementById("addr").innerHTML =
+document.getElementById("wallet").innerHTML =
 "Connected: " + addr;
 
-document.getElementById("dashboard").style.display="block";
+document.getElementById("dash").style.display="block";
 
 }
 
@@ -123,4 +110,4 @@ alert("Rewards claimed (demo)");
 </script>
 
 </body>
-      </html>
+</html>
