@@ -33,24 +33,31 @@ overflow:hidden;
 transform:translateZ(0);
 }
 
+.slider{
+position:relative;
+width:100%;
+height:100vh;
+overflow:hidden;
+background:#000;
+}
+
 .slide{
 position:absolute;
 width:100%;
 height:100%;
-background-size:cover;
+background-size:contain;
+background-repeat:no-repeat;
 background-position:center;
 opacity:0;
 transition:1s;
-filter:brightness(1.35) contrast(1.2) saturate(1.2);
 }
 
 .slide.active{opacity:1}
-
 .overlay{
 position:absolute;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.08);
+background:rgba(0,0,0,0.25); /* lighter = more clear */
 }
 }
 
@@ -123,20 +130,23 @@ margin-bottom:10px;
 /* ticker */
 .ticker{
 background:#111;
-padding:14px;
 color:gold;
+padding:14px;
+font-size:18px;
 overflow:hidden;
 white-space:nowrap;
 }
+
 .ticker span{
 display:inline-block;
 padding-left:100%;
-animation:scroll 16s linear infinite;
+animation:scroll 25s linear infinite;
 }
+
 @keyframes scroll{
 0%{transform:translateX(0)}
 100%{transform:translateX(-100%)}
-}
+  }
 
 .footer{
 text-align:center;
@@ -154,34 +164,36 @@ color:#777;
 </head>
 
 <body>
+</html>
 
-<!-- SLIDER -->
+<!-- HERO SLIDER -->
 <div class="slider">
 
-<div class="slide active"
-style="background-image:url('https://i.ibb.co/Rk1k8G5W/IMG-20260216-WA0001.jpg');">
-</div>
+<div class="slider">
 
-<div class="slide"
-style="background-image:url('https://i.ibb.co/5g6FmTYF/IMG-20260216-WA0002.jpg');">
-</div>
+  <!-- SLIDE 1 -->
+  <div class="slide active"
+  style="background-image:url('https://i.ibb.co/wN25zhmj/slide1.jpg')"></div>
 
-<div class="slide"
-style="background-image:url('https://i.ibb.co/KZLrBPj/IMG-20260216-WA0003.jpg');">
-</div>
+  <!-- SLIDE 2 -->
+  <div class="slide"
+  style="background-image:url('https://i.ibb.co/WNv0RjVd/slide2.jpg')"></div>
 
-<div class="overlay"></div>
+  <!-- SLIDE 3 -->
+  <div class="slide"
+  style="background-image:url('https://i.ibb.co/xKgHRQ4j/slide3.jpg')"></div>
 
-<div class="heroText">
-<h1>DimeX (DX)</h1>
-<button class="btn" onclick="enter()">ENTER DASHBOARD</button>
-</div>
+  <!-- TEXT -->
+  <div class="heroText">
+    <h1>DimeX (DX)</h1>
+    <button class="btn">ENTER DASHBOARD</button>
+  </div>
 
 </div>
 
 <!-- LIVE MARKET -->
 <div class="ticker">
-<span id="tickerText">Loading prices...</span>
+  <span id="tickerText">Loading market prices...</span>
 </div>
 
 <!-- ABOUT -->
@@ -329,29 +341,49 @@ info@dimex.app
 <div class="footer">© 2026 DimeX</div>
 
 <script>
-let i=0;
-let slides=document.querySelectorAll(".slide");
-setInterval(()=>{
-slides[i].classList.remove("active");
-i=(i+1)%slides.length;
-slides[i].classList.add("active");
-},3500);
+async function loadPrices(){
 
-async function load(){
-let r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,tether&vs_currencies=usd");
-let d=await r.json();
-document.getElementById("tickerText").innerHTML=
-`BTC $${d.bitcoin.usd} • ETH $${d.ethereum.usd} • BNB $${d.binancecoin.usd} • USDT $${d.tether.usd}`;
+try{
+
+let r = await fetch(
+"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"
+);
+
+let data = await r.json();
+
+let text = "";
+
+data.forEach(c=>{
+text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}%  •  `;
+});
+
+document.getElementById("tickerText").innerHTML = text;
+
+}catch(e){
+document.getElementById("tickerText").innerHTML="Price loading error";
 }
-load();
-setInterval(load,10000);
+
+}
+
+loadPrices();
+setInterval(loadPrices,15000);
+</script>
 
 function enter(){
 window.location.href="dashboard.html";
 }
-</script>
+<script>
+let i = 0;
+let slides = document.querySelectorAll(".slide");
 
+setInterval(()=>{
+  slides[i].classList.remove("active");
+  i = (i + 1) % slides.length;
+  slides[i].classList.add("active");
+}, 3500);
+</script>
 </body>
-  </html>
+</html>
+
 
 
