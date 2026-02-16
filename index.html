@@ -2,134 +2,188 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DimeX Staking</title>
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DimeX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body{background:#000;color:#fff;font-family:Arial;text-align:center}
-header{color:gold;font-size:28px;padding:20px}
-button{padding:14px 25px;margin:10px;background:gold;border:none;border-radius:8px}
-.card{background:#111;padding:20px;margin:20px auto;border-radius:12px;width:350px}
-input{padding:10px;width:80%;margin:10px}
+body{margin:0;font-family:Poppins;background:#000;color:#fff}
+
+.hero{
+text-align:center;
+padding:70px 20px;
+background:radial-gradient(circle,#111,#000);
+}
+
+h1{color:gold;font-size:44px;margin:10px 0}
+.sub{color:#ccc;font-size:18px}
+
+.btn{
+background:gold;border:none;padding:16px 28px;border-radius:10px;
+font-weight:bold;margin-top:25px;cursor:pointer
+}
+
+.section{padding:60px 20px;max-width:1000px;margin:auto}
+
+.card{
+background:#111;padding:25px;border-radius:16px;margin:20px 0;
+border:1px solid #222;
+}
+
+.card h2{color:gold;margin-top:10px}
+
+.icon{
+font-size:38px;color:gold;margin-bottom:10px
+}
+
+.row{
+display:flex;gap:20px;align-items:center
+}
+
+.row img{
+width:90px;
+filter:drop-shadow(0 0 15px gold);
+}
+
+.grid{
+display:grid;grid-template-columns:1fr 1fr;gap:20px
+}
+
+.footer{text-align:center;padding:40px;color:#888}
+
+@media(max-width:768px){
+.row{flex-direction:column;text-align:center}
+.grid{grid-template-columns:1fr}
+h1{font-size:32px}
+}
 </style>
 </head>
 
 <body>
 
-<header>DimeX Staking</header>
-
-<button onclick="connect()">CONNECT WALLET</button>
-<div id="wallet"></div>
-<div id="status"></div>
-
-<div id="app" style="display:none">
-
-<div class="card">
-<h3>Stake USDT</h3>
-<input id="usdtAmount" placeholder="Amount">
-
-<button onclick="approveUSDT()">Approve USDT</button>
-<button onclick="stakeUSDT()">Stake</button>
+<!-- HERO -->
+<div class="hero">
+<h1>DimeX (DX)</h1>
+<div class="sub">Secure Staking on BNB Smart Chain</div>
+<button class="btn" onclick="enterApp()">ENTER DASHBOARD</button>
 </div>
 
-<div class="card">
-<h3>Stake DX</h3>
-<input id="dxAmount" placeholder="Amount">
+<div class="section">
 
-<button onclick="approveDX()">Approve DX</button>
-<button onclick="stakeDX()">Stake</button>
+<div class="card">
+<div class="row">
+<i class="fa-solid fa-circle-info icon"></i>
+<div>
+<h2>About DimeX</h2>
+DimeX is a staking-focused crypto ecosystem enabling users to earn transparent on-chain rewards.
+</div>
+</div>
 </div>
 
 <div class="card">
-<button onclick="claim()">CLAIM REWARD</button>
+<div class="row">
+<i class="fa-solid fa-bullseye icon"></i>
+<div>
+<h2>Mission</h2>
+Build a secure and transparent staking ecosystem on BNB Smart Chain.
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="row">
+<i class="fa-solid fa-eye icon"></i>
+<div>
+<h2>Vision</h2>
+Create a globally trusted staking platform with long-term sustainability.
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="row">
+<i class="fa-solid fa-shield icon"></i>
+<div>
+<h2>Core Values</h2>
+Transparency<br>
+Security<br>
+Community growth
+</div>
+</div>
 </div>
 
 </div>
+
+<!-- PROJECT -->
+<div class="section">
+<div class="card">
+<div class="row">
+<i class="fa-solid fa-file icon"></i>
+<div>
+<h2>Project Details</h2>
+Project: DimeX<br>
+Symbol: DX<br>
+Network: BSC<br>
+Use: Staking
+</div>
+</div>
+</div>
+</div>
+
+<!-- TOKENOMICS -->
+<div class="section">
+<div class="card">
+<h2><i class="fa-solid fa-coins icon"></i> Tokenomics</h2>
+
+<div class="grid">
+<div class="card">
+Total Supply<br>
+<b style="color:gold">1,000,000,000 DX</b>
+</div>
+
+<div class="card">
+Reward Pool<br>
+<b style="color:gold">250,000,000 DX</b>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ROADMAP -->
+<div class="section">
+<div class="card">
+<h2><i class="fa-solid fa-road icon"></i> Roadmap</h2>
+
+Phase 1 – Launch<br>
+Phase 2 – Staking<br>
+Phase 3 – Growth
+
+</div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="section">
+<div class="card">
+<h2><i class="fa-solid fa-triangle-exclamation icon"></i> Disclaimer</h2>
+Crypto involves risk. Do your own research.
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-envelope icon"></i> Contact</h2>
+info@dimex.app
+</div>
+</div>
+
+<div class="footer">© 2026 DimeX</div>
 
 <script>
-
-let provider, signer, staking, usdt, dx;
-
-const stakingAddress = "PASTE_STAKING_CONTRACT";
-const usdtAddress = "PASTE_USDT";
-const dxAddress   = "PASTE_DX";
-
-const stakingABI = [
- "function stakeUSDT(uint amount,uint plan)",
- "function stakeDX(uint amount,uint plan)",
- "function claim()"
-];
-
-const erc20ABI = [
- "function approve(address spender,uint amount) external returns(bool)"
-];
-
-async function connect(){
-
-if(!window.ethereum){
-alert("Install MetaMask");
-return;
+function enterApp(){
+window.location.href="dashboard.html";
 }
-
-await window.ethereum.request({method:'eth_requestAccounts'});
-
-provider = new ethers.providers.Web3Provider(window.ethereum);
-signer = provider.getSigner();
-
-const net = await provider.getNetwork();
-if(net.chainId !== 56){
-alert("Switch to BSC Mainnet");
-return;
-}
-
-staking = new ethers.Contract(stakingAddress,stakingABI,signer);
-usdt = new ethers.Contract(usdtAddress,erc20ABI,signer);
-dx   = new ethers.Contract(dxAddress,erc20ABI,signer);
-
-let addr = await signer.getAddress();
-document.getElementById("wallet").innerHTML = addr;
-document.getElementById("app").style.display="block";
-}
-
-async function approveUSDT(){
-let amt = document.getElementById("usdtAmount").value;
-let tx = await usdt.approve(stakingAddress,ethers.utils.parseUnits(amt,18));
-document.getElementById("status").innerHTML="Approving USDT...";
-await tx.wait();
-document.getElementById("status").innerHTML="USDT Approved";
-}
-
-async function approveDX(){
-let amt = document.getElementById("dxAmount").value;
-let tx = await dx.approve(stakingAddress,ethers.utils.parseUnits(amt,18));
-document.getElementById("status").innerHTML="Approving DX...";
-await tx.wait();
-document.getElementById("status").innerHTML="DX Approved";
-}
-
-async function stakeUSDT(){
-let amt = document.getElementById("usdtAmount").value;
-let tx = await staking.stakeUSDT(ethers.utils.parseUnits(amt,18),0);
-document.getElementById("status").innerHTML="Staking USDT...";
-await tx.wait();
-document.getElementById("status").innerHTML="USDT Staked";
-}
-
-async function stakeDX(){
-let amt = document.getElementById("dxAmount").value;
-let tx = await staking.stakeDX(ethers.utils.parseUnits(amt,18),0);
-document.getElementById("status").innerHTML="Staking DX...";
-await tx.wait();
-document.getElementById("status").innerHTML="DX Staked";
-}
-
-async function claim(){
-let tx = await staking.claim();
-document.getElementById("status").innerHTML="Claiming...";
-await tx.wait();
-document.getElementById("status").innerHTML="Reward Claimed";
-}
-
 </script>
+
 </body>
-</html>
+ </html>
