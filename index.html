@@ -9,54 +9,93 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body{margin:0;font-family:Poppins;background:#000;color:#fff}
+body{
+margin:0;
+font-family:Poppins;
+background:#000;
+color:#fff;
+}
 
 .hero{
 text-align:center;
-padding:70px 20px;
+padding:80px 20px;
 background:radial-gradient(circle,#111,#000);
 }
 
-h1{color:gold;font-size:44px;margin:10px 0}
-.sub{color:#ccc;font-size:18px}
-
-.btn{
-background:gold;border:none;padding:16px 28px;border-radius:10px;
-font-weight:bold;margin-top:25px;cursor:pointer
+.logo{
+width:150px;
+filter:drop-shadow(0 0 25px gold);
+margin-bottom:20px;
 }
 
-.section{padding:60px 20px;max-width:1000px;margin:auto}
+h1{
+color:gold;
+font-size:42px;
+margin:10px 0;
+}
+
+.sub{
+color:#bbb;
+font-size:18px;
+}
+
+.btn{
+background:gold;
+border:none;
+padding:16px 30px;
+border-radius:10px;
+font-weight:bold;
+margin-top:25px;
+cursor:pointer;
+font-size:16px;
+}
+
+.section{
+padding:70px 20px;
+max-width:1100px;
+margin:auto;
+}
 
 .card{
-background:#111;padding:25px;border-radius:16px;margin:20px 0;
+background:#111;
+padding:25px;
+border-radius:16px;
+margin:20px 0;
 border:1px solid #222;
 }
 
-.card h2{color:gold;margin-top:10px}
-
-.icon{
-font-size:38px;color:gold;margin-bottom:10px
-}
-
-.row{
-display:flex;gap:20px;align-items:center
-}
-
-.row img{
-width:90px;
-filter:drop-shadow(0 0 15px gold);
+.card h2{
+color:gold;
+margin-top:0;
 }
 
 .grid{
-display:grid;grid-template-columns:1fr 1fr;gap:20px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
-.footer{text-align:center;padding:40px;color:#888}
+.icon{
+font-size:26px;
+color:gold;
+margin-bottom:10px;
+}
+
+img.sec{
+width:100%;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.footer{
+text-align:center;
+padding:40px;
+color:#888;
+}
 
 @media(max-width:768px){
-.row{flex-direction:column;text-align:center}
 .grid{grid-template-columns:1fr}
-h1{font-size:32px}
+h1{font-size:30px}
 }
 </style>
 </head>
@@ -65,90 +104,86 @@ h1{font-size:32px}
 
 <!-- HERO -->
 <div class="hero">
+<img class="logo" src="https://i.imgur.com/8Km9tLL.png">
 <h1>DimeX (DX)</h1>
 <div class="sub">Secure Staking on BNB Smart Chain</div>
-<button class="btn" onclick="enterApp()">ENTER DASHBOARD</button>
+<button class="btn" onclick="enter()">ENTER DASHBOARD</button>
 </div>
 
+<!-- ABOUT -->
 <div class="section">
 
 <div class="card">
-<div class="row">
-<i class="fa-solid fa-circle-info icon"></i>
-<div>
-<h2>About DimeX</h2>
-DimeX is a staking-focused crypto ecosystem enabling users to earn transparent on-chain rewards.
-</div>
-</div>
+<img class="sec" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0">
+<h2><i class="fa-solid fa-circle-info icon"></i> About DimeX</h2>
+DimeX is designed as a staking-focused crypto ecosystem that enables users to stake DX tokens and participate in a transparent on-chain reward system. The project emphasizes simplicity, sustainability and trust.
 </div>
 
 <div class="card">
-<div class="row">
-<i class="fa-solid fa-bullseye icon"></i>
-<div>
-<h2>Mission</h2>
-Build a secure and transparent staking ecosystem on BNB Smart Chain.
-</div>
-</div>
+<img class="sec" src="https://images.unsplash.com/photo-1642104704074-907c0698bbde">
+<h2><i class="fa-solid fa-bullseye icon"></i> Mission</h2>
+Our mission is to build a secure and transparent staking ecosystem on the BNB Smart Chain that empowers users through decentralized technology and sustainable reward mechanisms.
 </div>
 
 <div class="card">
-<div class="row">
-<i class="fa-solid fa-eye icon"></i>
-<div>
-<h2>Vision</h2>
-Create a globally trusted staking platform with long-term sustainability.
-</div>
-</div>
+<img class="sec" src="https://images.unsplash.com/photo-1621501103258-3e135c8c1b9d">
+<h2><i class="fa-solid fa-eye icon"></i> Vision</h2>
+To create a globally trusted staking platform that promotes financial participation through blockchain innovation and responsible growth.
 </div>
 
 <div class="card">
-<div class="row">
-<i class="fa-solid fa-shield icon"></i>
-<div>
-<h2>Core Values</h2>
-Transparency<br>
-Security<br>
-Community growth
-</div>
-</div>
+<h2><i class="fa-solid fa-shield icon"></i> Core Values</h2>
+✔ Transparency<br>
+✔ Smart contract security<br>
+✔ Long-term vision<br>
+✔ Community growth
 </div>
 
 </div>
 
-<!-- PROJECT -->
+<!-- CONTRACT -->
 <div class="section">
 <div class="card">
-<div class="row">
-<i class="fa-solid fa-file icon"></i>
-<div>
-<h2>Project Details</h2>
-Project: DimeX<br>
-Symbol: DX<br>
-Network: BSC<br>
-Use: Staking
-</div>
-</div>
+<h2><i class="fa-solid fa-file-contract icon"></i> Smart Contract</h2>
+
+DX Token Address:<br>
+<input style="width:100%;padding:12px" value="PASTE_TOKEN_ADDRESS">
+
+<br><br>
+Always verify contract on BscScan before interacting.
 </div>
 </div>
 
 <!-- TOKENOMICS -->
 <div class="section">
-<div class="card">
-<h2><i class="fa-solid fa-coins icon"></i> Tokenomics</h2>
-
 <div class="grid">
+
 <div class="card">
-Total Supply<br>
-<b style="color:gold">1,000,000,000 DX</b>
+<h2>Total Supply</h2>
+1,000,000,000 DX
 </div>
 
 <div class="card">
-Reward Pool<br>
-<b style="color:gold">250,000,000 DX</b>
+<h2>Reward Pool</h2>
+250,000,000 DX
+</div>
+
 </div>
 </div>
 
+<!-- STAKING -->
+<div class="section">
+<div class="card">
+<img class="sec" src="https://images.unsplash.com/photo-1621768216002-5ac171876625">
+<h2><i class="fa-solid fa-lock icon"></i> Staking Platform</h2>
+
+✓ Secure staking<br>
+✓ Transparent rewards<br>
+✓ No hidden minting<br>
+✓ Community rewards
+
+<br><br>
+Staking dashboard launching soon.
 </div>
 </div>
 
@@ -157,10 +192,20 @@ Reward Pool<br>
 <div class="card">
 <h2><i class="fa-solid fa-road icon"></i> Roadmap</h2>
 
-Phase 1 – Launch<br>
-Phase 2 – Staking<br>
-Phase 3 – Growth
+<b>Phase 1</b><br>
+Token creation<br>
+Contract deploy<br>
+Website launch<br><br>
 
+<b>Phase 2</b><br>
+Staking launch<br>
+Dashboard<br>
+Wallet integration<br><br>
+
+<b>Phase 3</b><br>
+DEX listing<br>
+Growth<br>
+Community
 </div>
 </div>
 
@@ -168,19 +213,20 @@ Phase 3 – Growth
 <div class="section">
 <div class="card">
 <h2><i class="fa-solid fa-triangle-exclamation icon"></i> Disclaimer</h2>
-Crypto involves risk. Do your own research.
+Crypto & staking involves risk. Do your own research before interacting with smart contracts.
 </div>
 
 <div class="card">
-<h2><i class="fa-solid fa-envelope icon"></i> Contact</h2>
-info@dimex.app
+<h2>Contact</h2>
+Website: dimex.app<br>
+Email: info@dimex.app
 </div>
 </div>
 
 <div class="footer">© 2026 DimeX</div>
 
 <script>
-function enterApp(){
+function enter(){
 window.location.href="dashboard.html";
 }
 </script>
