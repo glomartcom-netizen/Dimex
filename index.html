@@ -154,6 +154,44 @@ Always verify contract on BscScan before interacting.
 </div>
 </div>
 
+<!-- LIVE CRYPTO MARKET -->
+<div class="section">
+<div class="card">
+
+<h2><i class="fa-solid fa-chart-line" style="color:gold"></i> Live Crypto Market</h2>
+
+<div id="prices" style="margin-top:20px;font-size:18px;color:gold">
+Loading prices...
+</div>
+
+</div>
+</div>
+
+<script>
+async function loadPrices(){
+
+try{
+
+let r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,tether&vs_currencies=usd");
+let d = await r.json();
+
+document.getElementById("prices").innerHTML = `
+BTC: $${d.bitcoin.usd}<br>
+ETH: $${d.ethereum.usd}<br>
+BNB: $${d.binancecoin.usd}<br>
+USDT: $${d.tether.usd}
+`;
+
+}catch(e){
+document.getElementById("prices").innerHTML="Price loading error";
+}
+
+}
+
+loadPrices();
+setInterval(loadPrices,10000);
+</script>
+ 
 <!-- TOKENOMICS -->
 <div class="section">
 <div class="grid">
@@ -233,3 +271,4 @@ window.location.href="dashboard.html";
 
 </body>
  </html>
+
