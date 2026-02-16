@@ -203,7 +203,7 @@ color:#777;
 
   <div class="heroText">
     <h1>DimeX (DX)</h1>
-    <button class="btn">ENTER DASHBOARD</button>
+    <button class="btn" onclick="enter()">ENTER DASHBOARD</button>
   </div>
 
 </div>
@@ -568,6 +568,13 @@ For general inquiries and support, please contact via email.
 
 <!-- SLIDER SCRIPT -->
 <script>
+
+// dashboard button
+function enter(){
+window.location.href="dashboard.html";
+}
+
+// slider
 let i = 0;
 const slides = document.querySelectorAll(".slide");
 
@@ -576,15 +583,14 @@ setInterval(()=>{
   i = (i + 1) % slides.length;
   slides[i].classList.add("active");
 }, 3000);
-</script>
 
-<script>
+// crypto ticker
 async function loadPrices(){
 
 try{
 
 let r = await fetch(
-"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1"
+"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"
 );
 
 let data = await r.json();
@@ -592,7 +598,7 @@ let data = await r.json();
 let text = "";
 
 data.forEach(c=>{
-text += `${c.symbol.toUpperCase()} $${c.current_price}  ▲${c.price_change_percentage_24h.toFixed(2)}%   •   `;
+text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}% • `;
 });
 
 document.getElementById("tickerText").innerHTML = text;
@@ -604,24 +610,6 @@ document.getElementById("tickerText").innerHTML="Market loading...";
 }
 
 loadPrices();
-setInterval(loadPrices,30000);
+setInterval(loadPrices,15000);
+
 </script>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
