@@ -5,86 +5,141 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DimeX</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body{margin:0;background:#000;color:#fff;font-family:Poppins}
-.hero{text-align:center;padding:90px 20px;background:radial-gradient(circle,#111,#000)}
-.logo{width:180px;margin-bottom:20px;filter:drop-shadow(0 0 25px gold)}
-h1{color:gold;font-size:48px;margin:10px 0}
-.sub{color:#aaa;font-size:18px}
-.btn{background:gold;border:none;padding:16px 32px;border-radius:12px;font-weight:bold;margin:10px;cursor:pointer}
-.section{padding:70px 20px;max-width:1200px;margin:auto}
-.card{background:#111;padding:25px;border-radius:16px;margin:18px 0;border:1px solid #222}
-.card h2{color:gold}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-img.sec{width:100%;height:260px;object-fit:cover;border-radius:14px;margin-bottom:15px}
-.tokenBox{background:#111;border:1px solid gold;border-radius:16px;padding:30px;text-align:center}
-.tokenBox h1{color:gold}
-.footer{text-align:center;padding:40px;color:#777}
+body{
+margin:0;
+font-family:Poppins;
+background:#000;
+color:#fff;
+}
 
-/* ticker */
-.ticker-wrap{overflow:hidden;border-top:1px solid #222;border-bottom:1px solid #222}
-.ticker{white-space:nowrap;display:inline-block;padding:14px 0;color:gold;font-size:18px;animation:ticker 45s linear infinite}
-@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+/* SLIDER */
+.slider{
+position:relative;
+width:100%;
+height:90vh;
+overflow:hidden;
+}
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+opacity:0;
+transition:1s;
+}
+
+.slide.active{opacity:1}
+
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+}
+
+.heroText{
+position:absolute;
+bottom:60px;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+}
+
+.heroText h1{
+font-size:42px;
+color:gold;
+margin:0;
+}
+
+.btn{
+background:gold;
+border:none;
+padding:15px 28px;
+border-radius:10px;
+font-weight:bold;
+margin-top:15px;
+cursor:pointer;
+}
+
+/* SECTION */
+.section{
+padding:70px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+.card{
+background:#111;
+padding:25px;
+border-radius:16px;
+margin:20px 0;
+border:1px solid #222;
+}
+
+.card h2{color:gold}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.ticker{
+background:#111;
+padding:15px;
+font-size:18px;
+color:gold;
+white-space:nowrap;
+overflow:hidden;
+}
+
+.ticker span{
+display:inline-block;
+padding-left:100%;
+animation:scroll 15s linear infinite;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0)}
+100%{transform:translateX(-100%)}
+}
+
+.footer{
+text-align:center;
+padding:40px;
+color:#777;
+}
 
 @media(max-width:768px){
+.heroText h1{font-size:26px}
+.slider{height:70vh}
 .grid{grid-template-columns:1fr}
-h1{font-size:32px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-<img class="logo" src="https://i.ibb.co/zVB8fHMD/logo.png">
+<!-- SLIDER -->
+<div class="slider">
+
+<div class="slide active" style="background-image:url('https://i.ibb.co/6cQm3qX1/IMG-20260216-WA0001.jpg')"></div>
+<div class="slide" style="background-image:url('https://i.ibb.co/Vc9Y6k0L/IMG-20260216-WA0002.jpg')"></div>
+<div class="slide" style="background-image:url('https://i.ibb.co/0j3z7yQd/IMG-20260216-WA0003.jpg')"></div>
+
+<div class="overlay"></div>
+
+<div class="heroText">
 <h1>DimeX (DX)</h1>
-<div class="sub">Secure Staking on BNB Smart Chain</div>
-<button class="btn">ENTER DASHBOARD</button>
-<button class="btn">BUY DX</button>
-</div>
-
-<!-- LIVE MARKET -->
-<div class="ticker-wrap">
-<div class="ticker" id="ticker">Loading market...</div>
-</div>
-
-<script>
-async function loadTicker(){
-let r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana,ripple,cardano,tron,polygon,polkadot,dogecoin,avalanche-2,chainlink,uniswap,cosmos,stellar&vs_currencies=usd");
-let d=await r.json();
-document.getElementById("ticker").innerHTML=
-`BTC $${d.bitcoin.usd} • ETH $${d.ethereum.usd} • BNB $${d.binancecoin.usd} • SOL $${d.solana.usd} • XRP $${d.ripple.usd} • ADA $${d.cardano.usd} • TRX $${d.tron.usd} • MATIC $${d.polygon.usd} • DOT $${d.polkadot.usd} • DOGE $${d.dogecoin.usd} • AVAX $${d["avalanche-2"].usd}`;
-}
-loadTicker(); setInterval(loadTicker,15000);
-</script>
-
-<div class="section">
-
-<div class="card">
-<img class="sec" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1000&q=80">
-<h2><i class="fa-solid fa-circle-info"></i> About DimeX</h2>
-DimeX is designed as a staking-focused crypto ecosystem that enables users to stake DX tokens and participate in a transparent on-chain reward system. The project emphasizes simplicity, long-term sustainability, and trust.
-</div>
-
-<div class="card">
-<img class="sec" src="https://images.unsplash.com/photo-1642104704074-907c0698bbde?auto=format&fit=crop&w=1000&q=80">
-<h2><i class="fa-solid fa-bullseye"></i> Mission</h2>
-Our mission is to build a secure and transparent staking ecosystem on the BNB Smart Chain that empowers users through decentralized technology, verified smart contracts, and sustainable reward mechanisms.
-</div>
-
-<div class="card">
-<img class="sec" src="https://images.unsplash.com/photo-1621501103258-3e135c8c1b9d?auto=format&fit=crop&w=1000&q=80">
-<h2><i class="fa-solid fa-eye"></i> Vision</h2>
-Our vision is to create a globally trusted staking platform that promotes financial participation through blockchain innovation, transparency, and responsible growth.
-</div>
-  
-<div class="card">
-<h2><i class="fa-solid fa-shield"></i> Core Values</h2>
-Transparency • Smart contract security • Long-term vision • Community growth
+<button class="btn" onclick="enter()">ENTER DASHBOARD</button>
 </div>
 
 <div class="card">
@@ -93,6 +148,35 @@ Project Name: DimeX<br>
 Token Symbol: DX<br>
 Network: BNB Smart Chain<br>
 Primary Use Case: Staking & Rewards
+</div>
+  
+</div>
+
+<!-- LIVE MARKET TICKER -->
+<div class="ticker">
+<span id="tickerText">Loading prices...</span>
+</div>
+
+<!-- ABOUT -->
+<div class="section">
+<div class="card">
+<h2>About DimeX</h2>
+DimeX is designed as a staking-focused crypto ecosystem that enables users to stake DX tokens and participate in a transparent on-chain reward system. The project emphasizes simplicity, long-term sustainability, and trust.
+</div>
+
+<div class="card">
+<h2>Mission</h2>
+Our mission is to build a secure and transparent staking ecosystem on the BNB Smart Chain that empowers users through decentralized technology, verified smart contracts, and sustainable reward mechanisms.
+</div>
+
+<div class="card">
+<h2>Vision</h2>
+Our vision is to create a globally trusted staking platform that promotes financial participation through blockchain innovation, transparency, and responsible growth.
+</div>
+
+<div class="card">
+<h2><i class="fa-solid fa-shield"></i> Core Values</h2>
+Transparency • Smart contract security • Long-term vision • Community growth
 </div>
 
 <div class="card">
@@ -103,25 +187,19 @@ Always verify contract on BscScan.
 </div>
 
 <div class="card">
-<h2>Staking Platform</h2>
-DimeX is a staking-centric project enabling users to stake DX tokens and earn rewards through on-chain smart contracts.
-<br><br>
-✔ Secure decentralized staking  
-✔ Transparent reward distribution  
-✔ No hidden minting  
-✔ Community-oriented reward structure  
+<h2><i class="fa-solid fa-lock"></i> Staking Platform</h2>
+Secure decentralized staking with transparent reward distribution and community-driven reward structure.
 </div>
-
-<!-- TOKENOMICS -->
+  
 <div class="grid">
-<div class="tokenBox">
+<div class="card">
 <h2>Total Supply</h2>
-<h1>1,000,000,000 DX</h1>
+1,000,000,000 DX
 </div>
 
-<div class="tokenBox">
+<div class="card">
 <h2>Reward Pool</h2>
-<h1>250,000,000 DX</h1>
+250,000,000 DX
 </div>
 </div>
 
@@ -151,19 +229,45 @@ Platform optimization, ecosystem expansion, community development
 </div>
 
 <div class="card">
-<h2>Disclaimer</h2>
-DimeX (DX) is a blockchain-based project. Participation in cryptocurrency and staking involves risk. Users should conduct independent research before interacting with smart contracts.
+<h2><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer</h2>
+Participation in cryptocurrency and staking involves risk. Always do your own research.
 </div>
-
-<div class="card">
-<h2>Contact</h2>
-Website: dimex.app<br>
-Email: info@dimex.app
-</div>
-
+  
 </div>
 
 <div class="footer">© 2026 DimeX</div>
 
+<script>
+// slider
+let i=0;
+let slides=document.querySelectorAll(".slide");
+
+setInterval(()=>{
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
+},3500);
+
+// ticker prices
+async function load(){
+let r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,tether&vs_currencies=usd");
+let d=await r.json();
+document.getElementById("tickerText").innerHTML=
+`BTC $${d.bitcoin.usd} • ETH $${d.ethereum.usd} • BNB $${d.binancecoin.usd} • USDT $${d.tether.usd}`;
+}
+load();
+setInterval(load,10000);
+
+function enter(){
+window.location.href="dashboard.html";
+}
+</script>
+
+<div class="card">
+<h2><i class="fa-solid fa-envelope"></i> Contact</h2>
+Website: dimex.app<br>
+Email: info@dimex.app
+</div>  
+  
 </body>
-</html>
+  </html>
