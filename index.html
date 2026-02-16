@@ -119,19 +119,21 @@ margin-top:15px;
 cursor:pointer;
 }
 
-/* ticker */
 .ticker{
 background:#111;
 color:gold;
 padding:14px;
 overflow:hidden;
 white-space:nowrap;
+font-size:16px;
 }
+
 .ticker span{
 display:inline-block;
 padding-left:100%;
-animation:scroll 30s linear infinite;
+animation:scroll 60s linear infinite;
 }
+
 @keyframes scroll{
 0%{transform:translateX(0)}
 100%{transform:translateX(-100%)}
@@ -206,9 +208,9 @@ color:#777;
 
 </div>
 
-<!-- LIVE MARKET -->
+<!-- PRICE TICKER -->
 <div class="ticker">
-<span id="tickerText">Loading market...</span>
+  <span id="tickerText">Loading crypto market...</span>
 </div>
 
 <!-- ABOUT -->
@@ -582,7 +584,7 @@ async function loadPrices(){
 try{
 
 let r = await fetch(
-"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1"
+"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1"
 );
 
 let data = await r.json();
@@ -590,7 +592,7 @@ let data = await r.json();
 let text = "";
 
 data.forEach(c=>{
-text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}% • `;
+text += `${c.symbol.toUpperCase()} $${c.current_price}  ▲${c.price_change_percentage_24h.toFixed(2)}%   •   `;
 });
 
 document.getElementById("tickerText").innerHTML = text;
@@ -602,11 +604,12 @@ document.getElementById("tickerText").innerHTML="Market loading...";
 }
 
 loadPrices();
-setInterval(loadPrices,15000);
+setInterval(loadPrices,30000);
 </script>
 
 </body>
 </html>
+
 
 
 
