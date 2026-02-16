@@ -532,84 +532,57 @@ Cryptocurrency involves risk and users should conduct independent research befor
 
 <!-- CONTACT -->
 <div class="section">
-<div class="section-inner">
+<h2><i class="fa-solid fa-envelope icon"></i>Contact</h2>
 
-<h2>
-<i class="fa-solid fa-envelope icon"></i>
-Contact
-</h2>
+<div class="box" style="text-align:center;max-width:500px;margin:auto">
 
-<div class="box" style="text-align:center; max-width:500px; margin:auto;">
-
-<div style="margin:15px 0;font-size:18px;">
+<div>
 <i class="fa-solid fa-paper-plane" style="color:gold;"></i>
-<a href="mailto:info@dimex.app" style="color:#fff;text-decoration:none;">
 info@dimex.app
-</a>
 </div>
 
-<div style="margin:10px 0;color:#aaa;">
+<div style="margin-top:10px">
 <i class="fa-solid fa-globe" style="color:gold;"></i>
 www.dimex.app
 </div>
 
-<div style="margin-top:20px;color:#777;font-size:14px;">
-For general inquiries and support, please contact via email.
-</div>
-
-</div>
-
 </div>
 </div>
 
-<div class="footer">
-© 2026 DimeX
-</div>
+<div class="footer">© 2026 DimeX</div>
 
-<!-- SLIDER SCRIPT -->
+<!-- SCRIPT -->
 <script>
-
-// dashboard button
 function enter(){
 window.location.href="dashboard.html";
 }
 
 // slider
-let i = 0;
-const slides = document.querySelectorAll(".slide");
-
+let i=0;
+let slides=document.querySelectorAll(".slide");
 setInterval(()=>{
-  slides[i].classList.remove("active");
-  i = (i + 1) % slides.length;
-  slides[i].classList.add("active");
-}, 3000);
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
+},3000);
 
-// crypto ticker
+// crypto prices
 async function loadPrices(){
-
 try{
-
-let r = await fetch(
-"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"
-);
-
-let data = await r.json();
-
-let text = "";
-
-data.forEach(c=>{
-text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}% • `;
+let r=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1");
+let d=await r.json();
+let text="";
+d.forEach(c=>{
+text+=`${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}% • `;
 });
-
-document.getElementById("tickerText").innerHTML = text;
-
-}catch(e){
+document.getElementById("tickerText").innerHTML=text;
+}catch{
 document.getElementById("tickerText").innerHTML="Market loading...";
 }
-
 }
-
 loadPrices();
 setInterval(loadPrices,15000);
-
 </script>
+
+</body>
+</html>
