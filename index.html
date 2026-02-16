@@ -74,24 +74,35 @@ overflow:hidden;
 background:#000;
 }
 
+.slider{
+position:relative;
+width:100%;
+height:100vh;
+overflow:hidden;
+background:#000;
+}
+
 .slide{
 position:absolute;
 width:100%;
 height:100%;
-background-size:contain;
-background-repeat:no-repeat;
+background-size:cover;   /* 🔴 clarity */
 background-position:center;
+background-repeat:no-repeat;
 opacity:0;
-transition:1s;
+transition:1s ease;
 }
-.slide.active{opacity:1}
 
-.heroText{
+.slide.active{
+opacity:1;
+}
+
+/* overlay lighter */
+.overlay{
 position:absolute;
-bottom:80px;
-left:50%;
-transform:translateX(-50%);
-text-align:center;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.15);
 }
 
 .heroText h1{
@@ -179,14 +190,21 @@ color:#777;
 <!-- SLIDER -->
 <div class="slider">
 
-<div class="slide active" style="background-image:url('https://i.ibb.co/wN25zhmj/slide1.jpg')"></div>
-<div class="slide" style="background-image:url('https://i.ibb.co/WNv0RjVd/slide2.jpg')"></div>
-<div class="slide" style="background-image:url('https://i.ibb.co/xKgHRQ4j/slide3.jpg')"></div>
+  <div class="slide active"
+  style="background-image:url('https://i.ibb.co/wN25zhmj/slide1.jpg')"></div>
 
-<div class="heroText">
-<h1>DimeX (DX)</h1>
-<button class="btn" onclick="enter()">ENTER DASHBOARD</button>
-</div>
+  <div class="slide"
+  style="background-image:url('https://i.ibb.co/WNv0RjVd/slide2.jpg')"></div>
+
+  <div class="slide"
+  style="background-image:url('https://i.ibb.co/xKgHRQ4j/slide3.jpg')"></div>
+
+  <div class="overlay"></div>
+
+  <div class="heroText">
+    <h1>DimeX (DX)</h1>
+    <button class="btn">ENTER DASHBOARD</button>
+  </div>
 
 </div>
 
@@ -547,6 +565,7 @@ For general inquiries and support, please contact via email.
 <div class="footer">
 © 2026 DimeX
 </div>
+
 
 
 
