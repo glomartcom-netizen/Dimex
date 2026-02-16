@@ -17,13 +17,14 @@ color:#fff;
 line-height:1.7;
 }
 
-/* HERO SLIDER */
+/* SLIDER */
 .slider{
 position:relative;
 width:100%;
-height:95vh;
+height:92vh;
 overflow:hidden;
 }
+
 .slide{
 position:absolute;
 width:100%;
@@ -32,6 +33,7 @@ background-size:cover;
 background-position:center;
 opacity:0;
 transition:1s;
+filter:brightness(1.15) contrast(1.05);
 }
 .slide.active{opacity:1}
 
@@ -39,43 +41,48 @@ transition:1s;
 position:absolute;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.35);
 }
 
 .heroText{
 position:absolute;
-bottom:80px;
+bottom:70px;
 left:50%;
 transform:translateX(-50%);
 text-align:center;
 }
+
 .heroText h1{
-font-size:56px;
+font-size:52px;
 color:gold;
 margin:0;
 }
+
 .btn{
 background:gold;
 border:none;
-padding:18px 36px;
-border-radius:14px;
+padding:16px 30px;
+border-radius:12px;
 font-weight:bold;
-margin-top:20px;
+margin-top:15px;
 cursor:pointer;
-font-size:18px;
 }
 
-/* BIG SECTIONS */
+/* SECTIONS */
 .section{
-padding:100px 8%;
-max-width:1300px;
+padding:55px 8%;
+max-width:1200px;
 margin:auto;
+}
+
+.section:nth-of-type(even){
+background:#0b0b0b;
 }
 
 .section h2{
 color:gold;
-font-size:36px;
-margin-bottom:20px;
+font-size:34px;
+margin-bottom:15px;
 }
 
 .section p{
@@ -83,30 +90,30 @@ font-size:18px;
 color:#ddd;
 }
 
-/* GRID */
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:40px;
-margin-top:40px;
+gap:25px;
+margin-top:20px;
 }
 
 .box{
 background:#111;
-padding:30px;
-border-radius:18px;
-border:1px solid #222;
+padding:22px;
+border-radius:14px;
+border:1px solid #1a1a1a;
 }
 
 .icon{
-font-size:28px;
+font-size:26px;
 color:gold;
 margin-bottom:10px;
 }
 
+/* ticker */
 .ticker{
 background:#111;
-padding:16px;
+padding:14px;
 color:gold;
 overflow:hidden;
 white-space:nowrap;
@@ -114,7 +121,7 @@ white-space:nowrap;
 .ticker span{
 display:inline-block;
 padding-left:100%;
-animation:scroll 18s linear infinite;
+animation:scroll 16s linear infinite;
 }
 @keyframes scroll{
 0%{transform:translateX(0)}
@@ -123,14 +130,14 @@ animation:scroll 18s linear infinite;
 
 .footer{
 text-align:center;
-padding:50px;
+padding:40px;
 color:#777;
 }
 
 /* mobile */
 @media(max-width:900px){
 .grid{grid-template-columns:1fr}
-.heroText h1{font-size:32px}
+.heroText h1{font-size:30px}
 .slider{height:70vh}
 }
 </style>
@@ -140,6 +147,7 @@ color:#777;
 
 <!-- SLIDER -->
 <div class="slider">
+
 <div class="slide active" style="background-image:url('https://i.ibb.co/Rk1k8G5W/IMG-20260216-WA0001.jpg')"></div>
 <div class="slide" style="background-image:url('https://i.ibb.co/5g6FmTYF/IMG-20260216-WA0002.jpg')"></div>
 <div class="slide" style="background-image:url('https://i.ibb.co/KZLrBPj/IMG-20260216-WA0003.jpg')"></div>
@@ -148,11 +156,12 @@ color:#777;
 
 <div class="heroText">
 <h1>DimeX (DX)</h1>
-<button class="btn">ENTER DASHBOARD</button>
-</div>
+<button class="btn" onclick="enter()">ENTER DASHBOARD</button>
 </div>
 
-<!-- TICKER -->
+</div>
+
+<!-- LIVE MARKET -->
 <div class="ticker">
 <span id="tickerText">Loading prices...</span>
 </div>
@@ -162,7 +171,7 @@ color:#777;
 <h2><i class="fa-solid fa-circle-info"></i> About DimeX</h2>
 <p>
 DimeX is designed as a staking-focused crypto ecosystem that enables users to stake DX tokens and participate in a transparent on-chain reward system.  
-The platform emphasizes simplicity, long-term sustainability, and trust while creating a secure environment for users to earn rewards through blockchain technology.
+The platform emphasizes simplicity, long-term sustainability, and trust.
 </p>
 </div>
 
@@ -172,14 +181,14 @@ The platform emphasizes simplicity, long-term sustainability, and trust while cr
 <div>
 <h2><i class="fa-solid fa-bullseye"></i> Mission</h2>
 <p>
-Our mission is to build a secure and transparent staking ecosystem on the BNB Smart Chain that empowers users through decentralized technology, verified smart contracts, and sustainable reward mechanisms while fostering long-term trust and community growth.
+Our mission is to build a secure and transparent staking ecosystem on the BNB Smart Chain that empowers users through decentralized technology and sustainable reward mechanisms.
 </p>
 </div>
 
 <div>
 <h2><i class="fa-solid fa-eye"></i> Vision</h2>
 <p>
-Our vision is to create a globally trusted staking platform that promotes financial participation through blockchain innovation, transparency, and responsible growth, becoming a reliable part of the decentralized finance ecosystem.
+Our vision is to create a globally trusted staking platform that promotes financial participation through blockchain innovation and responsible growth.
 </p>
 </div>
 
@@ -190,25 +199,27 @@ Our vision is to create a globally trusted staking platform that promotes financ
 <h2><i class="fa-solid fa-shield"></i> Core Values</h2>
 
 <div class="grid">
+
 <div class="box">
 <div class="icon"><i class="fa-solid fa-lock"></i></div>
-Smart contract security and verified blockchain transparency.
+Smart contract security and blockchain transparency.
 </div>
 
 <div class="box">
 <div class="icon"><i class="fa-solid fa-users"></i></div>
-Community-driven growth and long-term sustainability.
+Community-driven growth and sustainability.
 </div>
 
 <div class="box">
 <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
-Sustainable reward systems with responsible expansion.
+Long-term reward ecosystem.
 </div>
 
 <div class="box">
 <div class="icon"><i class="fa-solid fa-globe"></i></div>
-Global ecosystem development and adoption.
+Global adoption and expansion.
 </div>
+
 </div>
 </div>
 
@@ -216,24 +227,15 @@ Global ecosystem development and adoption.
 <div class="section">
 <h2><i class="fa-solid fa-coins"></i> Staking Platform</h2>
 <p>
-DimeX is a staking-centric project enabling users to stake DX tokens and earn rewards through on-chain smart contracts.  
-The system is designed for transparency, stability, and long-term reward distribution without hidden minting mechanisms.
+Secure decentralized staking with transparent reward distribution and community-driven structure.
 </p>
-
-<ul>
-<li>Secure decentralized staking</li>
-<li>Transparent reward distribution</li>
-<li>Community reward structure</li>
-<li>Dashboard reward tracking</li>
-</ul>
 </div>
 
 <!-- VARIOUS ASSETS -->
 <div class="section">
 <h2><i class="fa-solid fa-layer-group"></i> Various Assets</h2>
 <p>
-DimeX is built with a flexible architecture designed to support multiple staking-related assets and utilities as the ecosystem evolves.  
-Future integrations may include liquidity pools, ecosystem tokens, and DeFi-related utilities.
+Flexible architecture supporting multiple staking-related assets and DeFi utilities.
 </p>
 </div>
 
@@ -241,20 +243,23 @@ Future integrations may include liquidity pools, ecosystem tokens, and DeFi-rela
 <div class="section">
 <h2><i class="fa-solid fa-screwdriver-wrench"></i> Enhanced Tools</h2>
 <p>
-The platform includes enhanced tools focused on usability, performance, and security, helping users manage staking activities and interact smoothly with smart contracts.
+Advanced tools for usability, performance, analytics and secure smart-contract interaction.
 </p>
 </div>
 
 <!-- TOKENOMICS -->
 <div class="section grid">
+
 <div>
 <h2>Total Supply</h2>
 <p>1,000,000,000 DX</p>
 </div>
+
 <div>
 <h2>Reward Pool</h2>
 <p>250,000,000 DX</p>
 </div>
+
 </div>
 
 <!-- ROADMAP -->
@@ -262,11 +267,11 @@ The platform includes enhanced tools focused on usability, performance, and secu
 <h2><i class="fa-solid fa-road"></i> Roadmap</h2>
 <p>
 Phase 1 – Foundation  
-Token creation, contract deployment, website launch  
+Token creation, contract deployment, branding  
 
 <br><br>
 Phase 2 – Staking Launch  
-Staking contract release, dashboard UI, wallet integration  
+Staking contract, dashboard UI, wallet integration  
 
 <br><br>
 Phase 3 – Growth  
@@ -278,16 +283,15 @@ Platform optimization, ecosystem expansion, community development
 <div class="section">
 <h2><i class="fa-solid fa-envelope"></i> Contact</h2>
 
-<p style="font-size:18px">
+<p>
 Website: https://dimex.app  
 <br><br>
 Email: <a href="mailto:info@dimex.app" style="color:gold">
 info@dimex.app
 </a>
 </p>
+</div>
 
-</div>  
-  
 <div class="footer">© 2026 DimeX</div>
 
 <script>
@@ -307,6 +311,10 @@ document.getElementById("tickerText").innerHTML=
 }
 load();
 setInterval(load,10000);
+
+function enter(){
+window.location.href="dashboard.html";
+}
 </script>
 
 </body>
