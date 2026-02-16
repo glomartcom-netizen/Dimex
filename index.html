@@ -6,7 +6,10 @@
 <title>DimeX</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- ICON LIBRARY -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 body{
@@ -14,25 +17,9 @@ margin:0;
 font-family:Poppins;
 background:#000;
 color:#fff;
-line-height:1.7;
 }
 
 /* SLIDER */
-.slider{
-position:relative;
-width:100%;
-height:92vh;
-overflow:hidden;
-}
-
-.slider{
-position:relative;
-width:100%;
-height:95vh;
-overflow:hidden;
-transform:translateZ(0);
-}
-
 .slider{
 position:relative;
 width:100%;
@@ -51,19 +38,11 @@ background-position:center;
 opacity:0;
 transition:1s;
 }
-
 .slide.active{opacity:1}
-.overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.25); /* lighter = more clear */
-}
-}
 
 .heroText{
 position:absolute;
-bottom:70px;
+bottom:80px;
 left:50%;
 transform:translateX(-50%);
 text-align:center;
@@ -78,53 +57,11 @@ margin:0;
 .btn{
 background:gold;
 border:none;
-padding:16px 30px;
-border-radius:12px;
+padding:15px 30px;
+border-radius:10px;
 font-weight:bold;
 margin-top:15px;
 cursor:pointer;
-}
-
-/* SECTIONS */
-.section{
-padding:55px 8%;
-max-width:1200px;
-margin:auto;
-}
-
-.section:nth-of-type(even){
-background:#0b0b0b;
-}
-
-.section h2{
-color:gold;
-font-size:34px;
-margin-bottom:15px;
-}
-
-.section p{
-font-size:18px;
-color:#ddd;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:25px;
-margin-top:20px;
-}
-
-.box{
-background:#111;
-padding:22px;
-border-radius:14px;
-border:1px solid #1a1a1a;
-}
-
-.icon{
-font-size:26px;
-color:gold;
-margin-bottom:10px;
 }
 
 /* ticker */
@@ -132,21 +69,50 @@ margin-bottom:10px;
 background:#111;
 color:gold;
 padding:14px;
-font-size:18px;
 overflow:hidden;
 white-space:nowrap;
 }
-
 .ticker span{
 display:inline-block;
 padding-left:100%;
-animation:scroll 25s linear infinite;
+animation:scroll 30s linear infinite;
 }
-
 @keyframes scroll{
 0%{transform:translateX(0)}
 100%{transform:translateX(-100%)}
-  }
+}
+
+/* sections */
+.section{
+padding:60px 8%;
+max-width:1200px;
+margin:auto;
+}
+.section:nth-child(even){
+background:#0b0b0b;
+}
+
+.section h2{
+color:gold;
+font-size:30px;
+}
+
+.icon{
+color:gold;
+margin-right:8px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+}
+
+.box{
+background:#111;
+padding:20px;
+border-radius:12px;
+}
 
 .footer{
 text-align:center;
@@ -154,7 +120,6 @@ padding:40px;
 color:#777;
 }
 
-/* mobile */
 @media(max-width:900px){
 .grid{grid-template-columns:1fr}
 .heroText h1{font-size:30px}
@@ -164,226 +129,118 @@ color:#777;
 </head>
 
 <body>
-</html>
 
-<!-- HERO SLIDER -->
+<!-- SLIDER -->
 <div class="slider">
 
-<div class="slider">
+<div class="slide active" style="background-image:url('https://i.ibb.co/wN25zhmj/slide1.jpg')"></div>
+<div class="slide" style="background-image:url('https://i.ibb.co/WNv0RjVd/slide2.jpg')"></div>
+<div class="slide" style="background-image:url('https://i.ibb.co/xKgHRQ4j/slide3.jpg')"></div>
 
-  <!-- SLIDE 1 -->
-  <div class="slide active"
-  style="background-image:url('https://i.ibb.co/wN25zhmj/slide1.jpg')"></div>
-
-  <!-- SLIDE 2 -->
-  <div class="slide"
-  style="background-image:url('https://i.ibb.co/WNv0RjVd/slide2.jpg')"></div>
-
-  <!-- SLIDE 3 -->
-  <div class="slide"
-  style="background-image:url('https://i.ibb.co/xKgHRQ4j/slide3.jpg')"></div>
-
-  <!-- TEXT -->
-  <div class="heroText">
-    <h1>DimeX (DX)</h1>
-    <button class="btn">ENTER DASHBOARD</button>
-  </div>
+<div class="heroText">
+<h1>DimeX (DX)</h1>
+<button class="btn" onclick="enter()">ENTER DASHBOARD</button>
+</div>
 
 </div>
 
 <!-- LIVE MARKET -->
 <div class="ticker">
-  <span id="tickerText">Loading market prices...</span>
+<span id="tickerText">Loading market...</span>
 </div>
 
 <!-- ABOUT -->
 <div class="section">
-<h2><i class="fa-solid fa-circle-info"></i> About DimeX</h2>
-<p>
-DimeX is designed as a staking-focused crypto ecosystem that enables users to stake DX tokens and participate in a transparent on-chain reward system.  
-The platform emphasizes simplicity, long-term sustainability, and trust.
-</p>
-</div>
-
-<!-- MISSION + VISION -->
-<div class="section grid">
-
-<div>
-<h2><i class="fa-solid fa-bullseye"></i> Mission</h2>
-<p>
-Our mission is to build a secure and transparent staking ecosystem on the BNB Smart Chain that empowers users through decentralized technology and sustainable reward mechanisms.
-</p>
-</div>
-
-<div>
-<h2><i class="fa-solid fa-eye"></i> Vision</h2>
-<p>
-Our vision is to create a globally trusted staking platform that promotes financial participation through blockchain innovation and responsible growth.
-</p>
-</div>
-
-</div>
-
-<!-- CORE VALUES -->
-<div class="section">
-<h2><i class="fa-solid fa-shield"></i> Core Values</h2>
-
-<div class="grid">
-
-<div class="box">
-<div class="icon"><i class="fa-solid fa-lock"></i></div>
-Smart contract security and blockchain transparency.
-</div>
-
-<div class="box">
-<div class="icon"><i class="fa-solid fa-users"></i></div>
-Community-driven growth and sustainability.
-</div>
-
-<div class="box">
-<div class="icon"><i class="fa-solid fa-chart-line"></i></div>
-Long-term reward ecosystem.
-</div>
-
-<div class="box">
-<div class="icon"><i class="fa-solid fa-globe"></i></div>
-Global adoption and expansion.
-</div>
-
-</div>
+<h2><i class="fa-solid fa-circle-info icon"></i>About DimeX</h2>
+<p>DimeX is a staking-focused crypto ecosystem built on BNB Smart Chain.</p>
 </div>
 
 <!-- STAKING -->
 <div class="section">
-<h2><i class="fa-solid fa-coins"></i> Staking Platform</h2>
-<p>
-Secure decentralized staking with transparent reward distribution and community-driven structure.
-</p>
+<h2><i class="fa-solid fa-coins icon"></i>Staking Platform</h2>
+<p>Secure decentralized staking with transparent rewards.</p>
 </div>
 
 <!-- VARIOUS ASSETS -->
 <div class="section">
-<h2><i class="fa-solid fa-layer-group"></i> Various Assets</h2>
-<p>
-Flexible architecture supporting multiple staking-related assets and DeFi utilities.
-</p>
+<h2><i class="fa-solid fa-layer-group icon"></i>Various Assets</h2>
+<p>Supports multiple DeFi utilities and staking assets.</p>
 </div>
 
 <!-- TOOLS -->
 <div class="section">
-<h2><i class="fa-solid fa-screwdriver-wrench"></i> Enhanced Tools</h2>
-<p>
-Advanced tools for usability, performance, analytics and secure smart-contract interaction.
-</p>
+<h2><i class="fa-solid fa-screwdriver-wrench icon"></i>Enhanced Tools</h2>
+<p>Advanced analytics, tracking and reward tools.</p>
+</div>
+
+<!-- MARKET ANALYSIS -->
+<div class="section">
+<h2><i class="fa-solid fa-chart-line icon"></i>Market Analysis</h2>
+<p>Real-time crypto market insights and charts.</p>
 </div>
 
 <!-- TOKENOMICS -->
 <div class="section grid">
-
 <div>
-<h2>Total Supply</h2>
+<h2><i class="fa-solid fa-database icon"></i>Total Supply</h2>
 <p>1,000,000,000 DX</p>
 </div>
 
 <div>
-<h2>Reward Pool</h2>
+<h2><i class="fa-solid fa-gift icon"></i>Reward Pool</h2>
 <p>250,000,000 DX</p>
 </div>
-
 </div>
 
 <!-- ROADMAP -->
 <div class="section">
-<h2><i class="fa-solid fa-road"></i> Roadmap</h2>
-<p>
-Phase 1 – Foundation  
-Token creation, contract deployment, branding  
-
-<br><br>
-Phase 2 – Staking Launch  
-Staking contract, dashboard UI, wallet integration  
-
-<br><br>
-Phase 3 – Growth  
-Platform optimization, ecosystem expansion, community development  
-</p>
+<h2><i class="fa-solid fa-road icon"></i>Roadmap</h2>
+<p>Phase 1 → Token & website  
+<br>Phase 2 → Staking launch  
+<br>Phase 3 → Growth</p>
 </div>
 
+<!-- DECLARATION -->
 <div class="section">
-<h2><i class="fa-solid fa-file-signature"></i> Declaration</h2>
+<h2><i class="fa-solid fa-file-signature icon"></i>Declaration</h2>
+<p>Crypto involves risk. Always do your research.</p>
+</div>
 
-<p>
-DimeX (DX) is a decentralized staking-based blockchain project built on the BNB Smart Chain.  
-All smart contract operations are executed on-chain and are publicly verifiable.  
-
-The project does not guarantee profits and participation in cryptocurrency involves risk.  
-Users are advised to conduct independent research before interacting with any smart contract or platform.
-</p>
-
-<p>
-By using the DimeX platform, users acknowledge and accept the decentralized nature of blockchain technology and assume full responsibility for their actions and wallet security.
-</p>
-</div>  
-  
 <!-- CONTACT -->
 <div class="section">
-<h2><i class="fa-solid fa-envelope"></i> Contact</h2>
-
-<p>
-Website: https://dimex.app  
-<br><br>
-Email: <a href="mailto:info@dimex.app" style="color:gold">
-info@dimex.app
-</a>
-</p>
+<h2><i class="fa-solid fa-envelope icon"></i>Contact</h2>
+<p>info@dimex.app</p>
 </div>
 
 <div class="footer">© 2026 DimeX</div>
 
 <script>
+// slider
+let i=0;
+let slides=document.querySelectorAll(".slide");
+setInterval(()=>{
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
+},3500);
+
+// ticker coins
 async function loadPrices(){
-
-try{
-
-let r = await fetch(
-"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"
-);
-
-let data = await r.json();
-
-let text = "";
-
-data.forEach(c=>{
-text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}%  •  `;
+let r=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1");
+let d=await r.json();
+let text="";
+d.forEach(c=>{
+text+=`${c.symbol.toUpperCase()} $${c.current_price} • `;
 });
-
-document.getElementById("tickerText").innerHTML = text;
-
-}catch(e){
-document.getElementById("tickerText").innerHTML="Price loading error";
+document.getElementById("tickerText").innerHTML=text;
 }
-
-}
-
 loadPrices();
 setInterval(loadPrices,15000);
-</script>
 
 function enter(){
 window.location.href="dashboard.html";
 }
-<script>
-let i = 0;
-let slides = document.querySelectorAll(".slide");
-
-setInterval(()=>{
-  slides[i].classList.remove("active");
-  i = (i + 1) % slides.length;
-  slides[i].classList.add("active");
-}, 3500);
 </script>
+
 </body>
-</html>
-
-
-
+                                                                </html>
