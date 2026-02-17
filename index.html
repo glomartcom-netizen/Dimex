@@ -745,40 +745,42 @@ function enter(){
   window.location.href="dashboard.html";
 }
 
-window.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("load", function(){
 
   // SLIDER
   let i = 0;
   const slides = document.querySelectorAll(".slide");
 
   setInterval(()=>{
-    slides[i].classList.remove("active");
-    i = (i + 1) % slides.length;
-    slides[i].classList.add("active");
+    if(slides.length){
+      slides[i].classList.remove("active");
+      i = (i + 1) % slides.length;
+      slides[i].classList.add("active");
+    }
   }, 3500);
 
 
-  // CRYPTO RATE
+  // PRICE TICKER
   async function loadPrices(){
     try{
 
-      let r = await fetch(
+      let res = await fetch(
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"
       );
 
-      let data = await r.json();
-      let text = "";
+      let data = await res.json();
+
+      let txt = "";
 
       data.forEach(c=>{
-        text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}% • `;
+        txt += `${c.symbol.toUpperCase()} $${c.current_price} • `;
       });
 
-      const el = document.getElementById("tickerText");
-      if(el) el.innerHTML = text;
+      document.getElementById("tickerText").innerHTML = txt;
 
     }catch(e){
-      const el = document.getElementById("tickerText");
-      if(el) el.innerHTML="Market loading...";
+      document.getElementById("tickerText").innerHTML =
+      "API blocked / internet issue";
     }
   }
 
@@ -787,8 +789,10 @@ window.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
+  
 </body>
 </html>
+
 
 
 
