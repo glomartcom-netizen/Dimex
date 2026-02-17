@@ -741,57 +741,54 @@ www.dimex.app
 
 <script>
 
-// dashboard button
 function enter(){
   window.location.href="dashboard.html";
 }
 
-// page load பிறகு run ஆகும்
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", function(){
 
-  /* SLIDER */
+  // SLIDER
   let i = 0;
   const slides = document.querySelectorAll(".slide");
 
-  if(slides.length){
-    setInterval(()=>{
-      slides[i].classList.remove("active");
-      i = (i + 1) % slides.length;
-      slides[i].classList.add("active");
-    }, 3500);
-  }
+  setInterval(()=>{
+    slides[i].classList.remove("active");
+    i = (i + 1) % slides.length;
+    slides[i].classList.add("active");
+  }, 3500);
 
-  /* CRYPTO RATE */
+
+  // CRYPTO RATE
   async function loadPrices(){
     try{
 
-      const res = await fetch(
+      let r = await fetch(
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"
       );
 
-      const data = await res.json();
-
+      let data = await r.json();
       let text = "";
 
       data.forEach(c=>{
         text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}% • `;
       });
 
-      const ticker = document.getElementById("tickerText");
-      if(ticker) ticker.innerHTML = text;
+      const el = document.getElementById("tickerText");
+      if(el) el.innerHTML = text;
 
     }catch(e){
-      document.getElementById("tickerText").innerHTML="Market loading...";
+      const el = document.getElementById("tickerText");
+      if(el) el.innerHTML="Market loading...";
     }
   }
 
   loadPrices();
-  setInterval(loadPrices, 15000);
+  setInterval(loadPrices,15000);
 
 });
 </script>
-
 </body>
 </html>
+
 
 
