@@ -746,35 +746,39 @@ function enter(){
   window.location.href="dashboard.html";
 }
 
-// wait page load
-window.addEventListener("load", function(){
+// page load பிறகு run ஆகும்
+window.addEventListener("DOMContentLoaded", () => {
 
-  // SLIDER
+  /* SLIDER */
   let i = 0;
   const slides = document.querySelectorAll(".slide");
 
-  setInterval(()=>{
-    slides[i].classList.remove("active");
-    i = (i + 1) % slides.length;
-    slides[i].classList.add("active");
-  }, 3500);
+  if(slides.length){
+    setInterval(()=>{
+      slides[i].classList.remove("active");
+      i = (i + 1) % slides.length;
+      slides[i].classList.add("active");
+    }, 3500);
+  }
 
-  // CRYPTO RATE
+  /* CRYPTO RATE */
   async function loadPrices(){
     try{
 
-      let r = await fetch(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1"
+      const res = await fetch(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"
       );
 
-      let data = await r.json();
+      const data = await res.json();
+
       let text = "";
 
       data.forEach(c=>{
         text += `${c.symbol.toUpperCase()} $${c.current_price} ▲ ${c.price_change_percentage_24h.toFixed(2)}% • `;
       });
 
-      document.getElementById("tickerText").innerHTML = text;
+      const ticker = document.getElementById("tickerText");
+      if(ticker) ticker.innerHTML = text;
 
     }catch(e){
       document.getElementById("tickerText").innerHTML="Market loading...";
@@ -782,12 +786,12 @@ window.addEventListener("load", function(){
   }
 
   loadPrices();
-  setInterval(loadPrices,15000);
+  setInterval(loadPrices, 15000);
 
 });
-
 </script>
 
 </body>
 </html>
+
 
