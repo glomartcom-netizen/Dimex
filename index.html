@@ -54,6 +54,18 @@ height:100%;
 background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.6));
 }
 
+.topLogo{
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+z-index:5;
+}
+
+.topLogo img{
+width:180px;
+}
+  
 .heroText{
 position:absolute;
 bottom:40px;   /* gap reduce */
@@ -150,12 +162,15 @@ color:#777;
 <!-- SLIDER -->
 <div class="slider">
 
-<div class="slider">
+<!-- TOP LOGO -->
+<div class="topLogo">
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/logodashbord.png">
+</div>
 
-<img class="slide active" 
+<img class="slide active"
 src="https://glomartcom-netizen.github.io/Dimexhome/file_0000000010947208bc00676243f4f87a.png">
 
-<img class="slide" 
+<img class="slide"
 src="https://glomartcom-netizen.github.io/Dimexhome/file_00000000c6a072089a23049a3dd76e06.png">
 
 <div class="overlay"></div>
@@ -185,20 +200,6 @@ function enter(){
 <!-- PROJECT DETAILS -->
 <div class="section" style="text-align:center;">
 
-  <!-- LOGO -->
-  <div style="
-text-align:center;
-padding:0;
-margin-top:-120px;   /* 🔴 logo மேலே போகும் */
-position:relative;
-z-index:5;
-">
-<img src="https://i.ibb.co/HpqwGFqt/logo.png?v=5"
-style="
-width:220px;
-display:block;
-margin:0 auto;
-">
 </div>
 
 <h2 style="margin-top:5px;">
@@ -639,6 +640,7 @@ slides[i].classList.add("active");
 
 </body>
 </html>
+
 
 
 
