@@ -43,7 +43,6 @@ transition:opacity 1s ease-in-out;
 
 .slide.active{
 opacity:1;
-z-index:2;
 }
 
 .overlay{
@@ -57,7 +56,7 @@ background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.6));
 
 .heroText{
 position:absolute;
-bottom:80px;
+bottom:40px;   /* gap reduce */
 left:50%;
 transform:translateX(-50%);
 text-align:center;
@@ -629,13 +628,14 @@ slides[i].classList.remove("active");
 i = (i + 1) % slides.length;
 slides[i].classList.add("active");
 }
-}, 3500);
+}, 4000);
 
 });
 </script>
 
 </body>
 </html>
+
 
 
 
