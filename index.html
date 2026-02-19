@@ -146,15 +146,17 @@ color:#777;
 <!-- SLIDER -->
 <div class="slider">
 
-    <img src="https://i.ibb.co/kVkVWgQf/image.jpg">
-    <img src="https://i.ibb.co/fY1ZRj7j/image.jpg">
-  </div>
+  <img src="https://i.ibb.co/kVkVWgQf/image.jpg" class="slide active">
+  <img src="https://i.ibb.co/fY1ZRj7j/image.jpg" class="slide">
 
   <div class="overlay"></div>
 
-<div class="heroText">
-<h1>DimeX (DMX)</h1>
-<button class="btn" onclick="enter()">ENTER DASHBOARD</button>
+  <div class="heroText">
+    <h1>DimeX (DMX)</h1>
+    <button class="btn" onclick="enter()">ENTER DASHBOARD</button>
+  </div>
+
+</div>
 
 <script>
 function enter(){
@@ -600,27 +602,31 @@ window.addEventListener("load", function(){
   }
 
   loadPrices();
-  setInterval(loadPrices,15000);
+setInterval(loadPrices,15000);
 
 });
 </script>
- 
+
+<script>
 window.addEventListener("load", function(){
 
-let slides=document.querySelectorAll(".slide");
-let i=0;
+let i = 0;
+const slides = document.querySelectorAll(".slide");
 
-setInterval(function(){
+setInterval(()=>{
+if(slides.length){
 slides[i].classList.remove("active");
-i=(i+1)%slides.length;
+i = (i + 1) % slides.length;
 slides[i].classList.add("active");
-},4000);
+}
+}, 3500);
 
 });
 </script>
 
 </body>
-</html> 
+</html>
+
 
 
 
