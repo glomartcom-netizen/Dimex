@@ -22,7 +22,7 @@ color:#fff;
 /* SLIDER */
 .slider{
 width:100%;
-height:100vh;
+height:90vh;
 position:relative;
 overflow:hidden;
 background:#000;
@@ -33,8 +33,7 @@ position:absolute;
 width:100%;
 height:100%;
 object-fit:cover;
-opacity:0;
-transition:opacity 1s ease-in-out;
+object-position:center;
 }
 
 .slide.active{
@@ -136,7 +135,7 @@ color:#777;
 @media(max-width:900px){
 .grid{grid-template-columns:1fr}
 .heroText h1{font-size:30px}
-.slider{height:70vh}
+.slider{height:60vh}
 }
 </style>
 </head>
@@ -631,6 +630,7 @@ slides[i].classList.add("active");
 
 </body>
 </html>
+
 
 
 
