@@ -1337,18 +1337,8 @@ For official updates, announcements, and support, please use the above communica
 
 <div class="footer">© 2026 DimeX. All rights reserved.</div>
   <script>  
-window.enter = async function(){
-
-  try{
-
-    await modal.open();
-
-  }catch(err){
-
-    console.log(err);
-
-  }
-
+function enter(){
+  showWalletPanel();
 }
 
 window.addEventListener("load", function(){
@@ -1545,24 +1535,166 @@ function copyText(id){
   
      
 </script>  
-<script type="module">
+<style>
 
-import { createAppKit } from 'https://esm.sh/@reown/appkit?bundle'
-import { EthersAdapter } from 'https://esm.sh/@reown/appkit-adapter-ethers?bundle'
-import { bsc } from 'https://esm.sh/@reown/appkit/networks?bundle'
+.wbtn{
+width:110px;
+margin:6px;
+padding:10px;
+border:none;
+border-radius:12px;
+background:#1e293b;
+color:#fff;
+font-size:12px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
 
-window.modal = createAppKit({
-  adapters:[new EthersAdapter()],
-  networks:[bsc],
-  defaultNetwork:bsc,
-  projectId:'1885ad435015158bf203263156175c91',
-  metadata:{
-    name:'DimeX',
-    description:'DimeX',
-    url:'https://www.dimex.world/Dash/',
-    icons:['https://i.ibb.co/HpqwGFqt/logo.png']
-  }
-});
+.wbtn:hover{
+background:#2563eb;
+}
+
+</style>
+
+<script>
+
+function enter(){
+showWalletPanel();
+}
+
+// ===== WALLET LINKS =====
+
+function openTrust(){
+window.location.href=
+"https://link.trustwallet.com/open_url?coin_id=20000714&url=https://www.dimex.world/Dash/";
+}
+
+function openMetaMask(){
+window.location.href=
+"https://metamask.app.link/dapp/www.dimex.world/Dash/";
+}
+
+function openBitget(){
+window.location.href=
+"https://bkcode.vip?action=web&url=https://www.dimex.world/Dash/";
+}
+
+function openOKX(){
+window.location.href=
+"okx://wallet/dapp/url?dappUrl=https://www.dimex.world/Dash/";
+}
+
+function openTokenPocket(){
+window.location.href=
+"tpdapp://open?params=%7B%22url%22%3A%22https%3A%2F%2Fwww.dimex.world%2FDash%2F%22%7D";
+}
+
+function openSafePal(){
+window.location.href=
+"safepal://browser?url=https://www.dimex.world/Dash/";
+}
+
+function openCoinbase(){
+window.location.href=
+"https://go.cb-w.com/dapp?cb_url=https://www.dimex.world/Dash/";
+}
+
+function openRabby(){
+window.location.href=
+"https://rabby.io";
+}
+
+// ===== WALLET PANEL =====
+
+function showWalletPanel(){
+
+if(document.getElementById("walletPanel")) return;
+
+const panel=document.createElement("div");
+
+panel.id="walletPanel";
+
+panel.style.position="fixed";
+panel.style.left="0";
+panel.style.bottom="0";
+panel.style.width="100%";
+panel.style.background="#0b1220";
+panel.style.padding="20px";
+panel.style.zIndex="99999";
+panel.style.borderTop="1px solid #333";
+panel.style.textAlign="center";
+
+panel.innerHTML=`
+
+<h3 style="color:#fff;margin-bottom:15px;">
+Select Wallet
+</h3>
+
+<div>
+
+<button onclick="openTrust()" class="wbtn">
+🟡<br>Trust
+</button>
+
+<button onclick="openMetaMask()" class="wbtn">
+🦊<br>MetaMask
+</button>
+
+<button onclick="openBitget()" class="wbtn">
+🟢<br>Bitget
+</button>
+
+<button onclick="openOKX()" class="wbtn">
+⚫<br>OKX
+</button>
+
+<button onclick="openTokenPocket()" class="wbtn">
+🟠<br>TokenPocket
+</button>
+
+<button onclick="openSafePal()" class="wbtn">
+🟢<br>SafePal
+</button>
+
+<button onclick="openCoinbase()" class="wbtn">
+🔵<br>Coinbase
+</button>
+
+<button onclick="openRabby()" class="wbtn">
+🐰<br>Rabby
+</button>
+
+</div>
+
+<br>
+
+<button onclick="hideWalletPanel()"
+style="
+background:#dc2626;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:10px;
+font-weight:bold;">
+❌ Close
+</button>
+
+`;
+
+document.body.appendChild(panel);
+
+}
+
+function hideWalletPanel(){
+
+const panel=document.getElementById("walletPanel");
+
+if(panel){
+panel.remove();
+}
+
+}
 
 </script>
   
