@@ -1535,14 +1535,15 @@ function copyText(id){
   
      
 </script>  
+
 <style>
 
 .wbtn{
 width:110px;
 margin:6px;
-padding:10px;
+padding:12px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 background:#1e293b;
 color:#fff;
 font-size:12px;
@@ -1553,6 +1554,12 @@ transition:.3s;
 
 .wbtn:hover{
 background:#2563eb;
+}
+
+.wbtn img{
+width:42px;
+height:42px;
+margin-bottom:6px;
 }
 
 </style>
@@ -1575,14 +1582,9 @@ window.location.href=
 "https://metamask.app.link/dapp/www.dimex.world/Dash/";
 }
 
-function openBitget(){
+function openCoinbase(){
 window.location.href=
-"https://bkcode.vip?action=web&url=https://www.dimex.world/Dash/";
-}
-
-function openOKX(){
-window.location.href=
-"okx://wallet/dapp/url?dappUrl=https://www.dimex.world/Dash/";
+"https://go.cb-w.com/dapp?cb_url=https://www.dimex.world/Dash/";
 }
 
 function openTokenPocket(){
@@ -1590,22 +1592,29 @@ window.location.href=
 "tpdapp://open?params=%7B%22url%22%3A%22https%3A%2F%2Fwww.dimex.world%2FDash%2F%22%7D";
 }
 
-function openSafePal(){
+function openImToken(){
 window.location.href=
-"safepal://browser?url=https://www.dimex.world/Dash/";
+"imtokenv2://navigate/DappView?url=https://www.dimex.world/Dash/";
 }
 
-function openCoinbase(){
+function openMathWallet(){
 window.location.href=
-"https://go.cb-w.com/dapp?cb_url=https://www.dimex.world/Dash/";
+"mathwallet://mathwallet.org?action=link&value=https://www.dimex.world/Dash/";
 }
 
-function openRabby(){
-window.location.href=
-"https://rabby.io";
+function copyDashUrl(){
+
+navigator.clipboard.writeText(
+"https://www.dimex.world/Dash/"
+);
+
+alert(
+"Dashboard link copied.\n\nOpen your wallet DApp Browser and paste the link."
+);
+
 }
 
-// ===== WALLET PANEL =====
+// ===== PANEL =====
 
 function showWalletPanel(){
 
@@ -1634,36 +1643,54 @@ Select Wallet
 <div>
 
 <button onclick="openTrust()" class="wbtn">
-🟡<br>Trust
+<img src="https://registry.walletconnect.org/v2/logo/md/0528ee15-16cc-46c0-82e9-49cfd5d17b00">
+<br>Trust Wallet
 </button>
 
 <button onclick="openMetaMask()" class="wbtn">
-🦊<br>MetaMask
-</button>
-
-<button onclick="openBitget()" class="wbtn">
-🟢<br>Bitget
-</button>
-
-<button onclick="openOKX()" class="wbtn">
-⚫<br>OKX
-</button>
-
-<button onclick="openTokenPocket()" class="wbtn">
-🟠<br>TokenPocket
-</button>
-
-<button onclick="openSafePal()" class="wbtn">
-🟢<br>SafePal
+🦊
+<br>MetaMask
 </button>
 
 <button onclick="openCoinbase()" class="wbtn">
-🔵<br>Coinbase
+<img src="https://registry.walletconnect.org/v2/logo/md/4622a2b2-6d5d-4f7e-93a6-d0a2e2e6a9c9">
+<br>Coinbase
 </button>
 
-<button onclick="openRabby()" class="wbtn">
-🐰<br>Rabby
+<button onclick="openTokenPocket()" class="wbtn">
+<img src="https://registry.walletconnect.org/v2/logo/md/f2bb4050-503e-4fa3-8fa2-91ef4ab67c00">
+<br>TokenPocket
 </button>
+
+<button onclick="openImToken()" class="wbtn">
+<img src="https://registry.walletconnect.org/v2/logo/md/8f5b9d66-5dba-4e8f-bc4d-1f4ffef6c96f">
+<br>imToken
+</button>
+
+<button onclick="openMathWallet()" class="wbtn">
+<img src="https://registry.walletconnect.org/v2/logo/md/c57ca95b-4f4d-48c6-8c1c-2a4f6d7d6a6e">
+<br>MathWallet
+</button>
+
+<button onclick="copyDashUrl()" class="wbtn">
+🌐
+<br>Other Wallet
+</button>
+
+</div>
+
+<div style="
+margin-top:15px;
+font-size:12px;
+color:#aaa;
+line-height:1.7;
+">
+
+✔ Other Wallet Users
+
+<br><br>
+
+Open DimeX Dashboard directly inside your wallet's DApp Browser.
 
 </div>
 
@@ -1677,7 +1704,9 @@ border:none;
 padding:10px 20px;
 border-radius:10px;
 font-weight:bold;">
+
 ❌ Close
+
 </button>
 
 `;
