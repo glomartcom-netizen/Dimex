@@ -1,1 +1,1570 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>DimeX</title>  
+  
+<link rel="manifest" href="/manifest.json">  
+<meta name="theme-color" content="#38bdf8">  
+  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
+  
+<style>  
+body{  
+margin:0;  
+font-family:Poppins;  
+background:#000;  
+color:#fff;  
+line-height:1.7;  
+  
+/* 🔥 PREMIUM WEB3 GLOW */  
+background-image:  
+radial-gradient(circle at 20% 30%, rgba(255,215,0,0.08), transparent 40%),  
+radial-gradient(circle at 80% 70%, rgba(255,215,0,0.05), transparent 40%);  
+}  
+  
+/* ===== PREMIUM LOADER ===== */  
+#loader{  
+position:fixed;  
+inset:0;  
+background:#000;  
+display:flex;  
+align-items:center;  
+justify-content:center;  
+z-index:99999;  
+transition:0.6s ease;  
+}  
+  
+.loaderBox{text-align:center;}  
+  
+.loaderLogo{  
+color:gold;  
+font-size:28px;  
+letter-spacing:4px;  
+margin-bottom:20px;  
+animation:pulse 1.5s infinite;  
+}  
+  
+.loaderBar{  
+width:220px;  
+height:3px;  
+background:#111;  
+overflow:hidden;  
+position:relative;  
+}  
+  
+.loaderBar::after{  
+content:"";  
+position:absolute;  
+left:-50%;  
+width:50%;  
+height:100%;  
+background:gold;  
+animation:loadmove 1.2s infinite;  
+}  
+  
+@keyframes loadmove{  
+0%{left:-50%;}  
+100%{left:100%;}  
+}  
+  
+@keyframes pulse{  
+0%,100%{opacity:1;}  
+50%{opacity:.4;}  
+}  
+  
+/* ===== YOUR ORIGINAL CSS CONTINUES BELOW (UNCHANGED) ===== */  
+  
+.hero{  
+min-height:70vh;  
+display:flex;  
+align-items:center;  
+justify-content:center;  
+text-align:center;  
+padding:40px 20px;  
+background: linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.95));  
+background-size:cover;  
+background-position:center;  
+}  
+  
+.hero h1{  
+font-size:64px;  
+color:gold;  
+margin-bottom:10px;  
+}  
+  
+.hero p{  
+max-width:900px;  
+margin:auto;  
+color:#ddd;  
+}  
+  
+.buttons{  
+margin-top:25px;  
+}  
+  
+.section{  
+padding:35px 7%;  
+max-width:1200px;  
+margin:auto;  
+}  
+  
+.section h2{  
+color:gold;  
+margin:0 0 10px 0;  
+line-height:1.2;  
+}  
+  
+p{  
+margin:6px 0;  
+line-height:1.4;  
+}  
+  
+h1,h2,h3{  
+margin-top:0;  
+margin-bottom:4px;  
+}  
+  
+.goldTitle{color:gold;margin-bottom:8px;}  
+  
+.slider{  
+position:relative;  
+width:100%;  
+height:100vh;  
+overflow:hidden;  
+}  
+  
+.slide{  
+position:absolute;  
+width:100%;  
+height:100%;  
+object-fit:cover;  
+opacity:0;  
+transition:1s;  
+}  
+  
+.slide.active{opacity:1;}  
+  
+.overlay{  
+position:absolute;  
+inset:0;  
+background:rgba(0,0,0,0.35);  
+}  
+  
+.topLogo{  
+position:absolute;  
+top:20px;  
+left:50%;  
+transform:translateX(-50%);  
+z-index:5;  
+}  
+  
+.topLogo img{width:180px;}  
+  
+.heroText{  
+position:absolute;  
+bottom:80px;  
+left:50%;  
+transform:translateX(-50%);  
+z-index:5;  
+}  
+  
+.btn{  
+padding:16px 28px;  
+background:gold;  
+border:none;  
+border-radius:10px;  
+font-weight:bold;  
+cursor:pointer;  
+}  
+  
+.desktop{display:block;}  
+.mobile{display:none;}  
+  
+@media(max-width:768px){  
+.desktop{display:none;}  
+.mobile{display:block;}  
+}  
+  
+.ticker span{  
+display:inline-block;  
+padding-left:100%;  
+animation: tickerMove 40s linear infinite;  
+}  
+  
+@keyframes tickerMove{  
+0%{ transform: translateX(0); }  
+100%{ transform: translateX(-100%); }  
+  }  
+    
+.ticker{  
+position:fixed;  
+bottom:0;  
+width:100%;  
+background:#000;  
+color:gold;  
+padding:8px;  
+font-size:13px;  
+white-space:nowrap;  
+overflow:hidden;  
+z-index:999;  
+}  
+  
+a{  
+text-decoration:none !important;  
+color:gold !important;  
+}  
+  
+.box{  
+background:#11161c;  
+border:1px solid #1f2933;  
+border-radius:12px;  
+padding:18px;  
+}  
+  
+.fullBanner {  
+  width: 100%;  
+  margin: 0;  
+  padding: 0;  
+}  
+  
+.fullBanner img {  
+  width: 100% !important;  
+  display: block;  
+  object-fit: cover;  
+}  
+    
+ul{  
+margin:6px 0;  
+padding-left:18px;  
+}  
+  
+li{margin:3px 0;}  
+  
+table{  
+width:100%;  
+border-collapse:collapse;  
+margin-top:12px;  
+}  
+  
+th,td{  
+border:1px solid #333;  
+padding:10px;  
+text-align:center;  
+}  
+  
+th{  
+background:#111;  
+color:gold;  
+}  
+  
+.tick{list-style:none;padding-left:0;}  
+.tick li{margin:6px 0;}  
+.tick li::before{content:"✔";color:gold;margin-right:8px;}  
+  
+.glassCard{  
+max-width:520px;  
+margin:20px auto;  
+padding:28px;  
+border-radius:18px;  
+background:rgba(255,255,255,0.03);  
+backdrop-filter:blur(10px);  
+border:1px solid rgba(255,215,0,0.35);  
+box-shadow:0 0 35px rgba(255,215,0,0.18),0 0 60px rgba(255,215,0,0.08);  
+}  
+  
+.smallIcon,  
+.icon{  
+color:gold !important;  
+}  
+  
+/* ===== GOLD INFO BOX FIXED ===== */  
+  
+.goldBox{  
+background:linear-gradient(180deg,#111,#0a0a0a);  
+  
+border:1px solid rgba(255,215,0,0.25);  
+border-left:2px solid gold;   /* thinner border */  
+  
+padding:16px 18px;            /* more breathing space */  
+margin:14px 0;  
+  
+border-radius:10px;  
+  
+box-shadow:  
+0 0 18px rgba(255,215,0,0.10),  
+inset 0 0 6px rgba(255,215,0,0.04);  
+}  
+  
+.infoList{  
+list-style:none;  
+padding-left:0;  
+margin-top:12px;  
+}  
+  
+.infoList li{  
+margin:10px 0;  
+padding-left:20px;  
+position:relative;  
+font-size:14px;  
+line-height:1.6;  
+}  
+  
+.infoList li::before{  
+content:"✔";  
+position:absolute;  
+left:0;  
+color:gold;  
+font-size:12px;  
+}  
+  
+.goldExample{  
+background:linear-gradient(180deg,#0d0d0d,#080808);  
+border:1px solid rgba(255,215,0,0.4);  
+border-radius:14px;  
+padding:20px;  
+box-shadow:0 0 25px rgba(255,215,0,0.15);  
+}  
+  
+/* title */  
+.goldHead{  
+color:gold;  
+font-size:14px;  
+letter-spacing:1px;  
+display:block;  
+margin-bottom:6px;  
+}  
+    
+.smallIcon,  
+.icon{  
+color:gold !important;  
+}  
+    
+.aboutWide{  
+background:#11161c;  
+padding:28px;  
+border-radius:14px;  
+color:#ccc;  
+border:1px solid #1f2933;  
+}  
+.contractInput{  
+width:80%;  
+max-width:520px;  
+padding:12px;  
+background:#000;  
+color:#fff;  
+border:1px solid #333;  
+border-radius:8px;  
+display:block;  
+margin:10px auto;  
+text-align:center;  
+}  
+  
+.contractActions{  
+display:flex;  
+justify-content:center;  
+gap:10px;  
+margin-bottom:10px;  
+}  
+  
+.scanBtn{  
+background:#111;  
+color:gold;  
+padding:8px 14px;  
+border-radius:6px;  
+text-decoration:none;  
+border:1px solid gold;  
+font-size:13px;  
+}  
+  
+.copyBtn{  
+background:gold;  
+color:#000;  
+border:none;  
+padding:8px 14px;  
+border-radius:6px;  
+font-weight:bold;  
+cursor:pointer;  
+font-size:13px;  
+  }  
+.footer{text-align:center;padding:25px;color:#777;}  
+  .heroText .btn{  
+margin:10px;  
+  }  
+    
+/* BUTTON GROUP CENTER */  
+.btnGroup{  
+display:flex;  
+flex-direction:column;     
+align-items:center;  
+gap:15px;  
+}  
+  
+/* MAIN DASHBOARD BUTTON */  
+.mainBtn{  
+background:gold;  
+color:#000;  
+min-width:220px;  
+}  
+  
+/* INSTALL BUTTON (🔥 PREMIUM PINK) */  
+.installBtn{  
+background:linear-gradient(45deg,#22c55e,#16a34a);  
+color:#fff;  
+min-width:220px;  
+box-shadow:0 0 12px rgba(34,197,94,0.5);  
+}  
+  
+/* BUTTON SIZE FIX */  
+.btn{  
+padding:16px 28px;  
+border:none;  
+border-radius:12px;  
+font-weight:bold;  
+cursor:pointer;  
+font-size:15px;  
+text-align:center;  
+  }  
+    
+</style>  
+</head>  
+  
+<body>  
+  
+<!-- ===== LOADER ADDED ===== -->  
+<div id="loader">  
+<div class="loaderBox">  
+<div class="loaderLogo">DMX</div>  
+<div class="loaderBar"></div>  
+</div>  
+</div>  
+    
+<!-- SLIDER -->  
+<div class="slider">  
+  
+<div class="topLogo">  
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/logodashbord.png">  
+</div>  
+  
+<!-- DESKTOP -->  
+<img class="slide desktop active"  
+src="https://glomartcom-netizen.github.io/Dimexhome/file_0000000010947208bc00676243f4f87a.png">  
+  
+<img class="slide desktop"  
+src="https://glomartcom-netizen.github.io/Dimexhome/file_00000000c6a072089a23049a3dd76e06.png">  
+  
+<!-- MOBILE -->  
+<img class="slide mobile"  
+src="https://raw.githubusercontent.com/glomartcom-netizen/DimeXtest/main/mobileslide1.png">  
+  
+<img class="slide mobile"  
+src="https://raw.githubusercontent.com/glomartcom-netizen/DimeXtest/main/mobileslide2.png">  
+  
+<div class="overlay"></div>  
+  
+</div>   <!-- slider end -->  
+    
+<div class="heroText">  
+  
+<div class="btnGroup">  
+<button class="btn mainBtn" onclick="enter()">ENTER DASHBOARD</button>  
+  
+<button class="btn installBtn" onclick="installApp()">  
+📲 INSTALL APP  
+</button>  
+</div>  
+  
+</div>  
+  
+<div class="ticker">  
+<span id="tickerText">Loading crypto market...</span>  
+</div>  
+    
+  <!-- INTRO STATEMENT -->  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-bolt icon"></i>  
+INTRO STATEMENT  
+</h2>  
+  
+<div class="aboutWide">  
+  
+<p>  
+DimeX is not just a token — it is a liquidity-driven ecosystem designed for long-term stability and sustainable growth.  
+</p>  
+  
+<p>  
+The platform follows a structured liquidity-first approach, where staking participation directly contributes to strengthening market liquidity and improving overall token stability.  
+</p>  
+  
+<p>  
+By integrating staking with liquidity development, DimeX creates a balanced system that supports transparent rewards, reduced volatility, and scalable ecosystem growth.  
+</p>  
+  
+</div>  
+  
+</section>  
+  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-chart-line icon"></i>  
+DMX Future Growth Vision  
+</h2>  
+  
+<p class="subText">  
+DimeX is built with a strong focus on liquidity growth as the foundation of a stable ecosystem.  
 
+As liquidity increases:  
+✔ Market stability improves  
+✔ Price volatility reduces  
+✔ Long-term growth becomes more sustainable  
+</p>  
+  
+<div class="glassCard">  
+  
+<ul class="tick">  
+<li>Liquidity-first model ensuring stability before expansion</li>  
+<li>Controlled and structured growth model</li>  
+<li>Community-driven ecosystem scaling</li>  
+<li>Long-term sustainability approach</li>  
+</ul>  
+  
+</div>
+  
+<canvas id="growthChart" style="max-width:100%;margin-top:30px;"></canvas>  
+  
+<div class="goldBox" style="margin-top:20px;">  
+  
+<b class="goldHead">Growth Expectation</b>  
+  
+<p>  
+In the early stage, liquidity buildup plays a key role in stabilizing the token and reducing market volatility.  
+</p>  
+  
+<p>  
+As adoption increases and ecosystem participation grows, demand strengthens — supporting gradual and sustainable price growth.  
+</p>  
+  
+<p>  
+This model is designed to prioritize long-term stability and structured expansion rather than short-term price spikes.  
+</p>  
+  
+</div>  
+  
+<p style="font-size:12px;color:#888;margin-top:10px;">  
+* This is a projected growth illustration based on liquidity development, user participation, and ecosystem expansion.  
+</p>  
+  
+</section>   
+  
+<!-- PROJECT OVERVIEW -->  
+<section class="section" style="padding:0;">  
+  <div class="fullBanner">  
+    <img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/project.png">  
+  </div>  
+</section>  
+  
+<!-- ABOUT DimeX -->  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-circle-info icon"></i>  
+ABOUT DimeX  
+</h2>  
+  
+<div class="aboutWide">  
+  
+DimeX is a decentralized staking and liquidity ecosystem built with a liquidity-first approach to establish strong token fundamentals before expansion.  
+
+The platform focuses on structured growth, transparent reward distribution, and sustainable ecosystem development.  
+
+Users participate by staking assets, directly contributing to liquidity strength while earning rewards for supporting the network.  
+
+By prioritizing liquidity and stability, DimeX creates a scalable environment designed for long-term growth and market confidence.  
+  
+</div>  
+</section>  
+  
+<!-- MISSION -->  
+<section class="section">  
+<h2 id="mission">  
+<a href="#mission">  
+<i class="fa-solid fa-bullseye icon"></i>  
+MISSION  
+</a>  
+</h2>  
+<div class="box">To build a secure, transparent, and scalable staking ecosystem powered by liquidity growth, supporting sustainable token development and long-term value creation.</div>  
+</section>  
+  
+<!-- VISION -->  
+<section class="section">  
+<h2 id="vision">  
+<a href="#vision">  
+<i class="fa-solid fa-eye icon"></i>  
+VISION  
+</a>  
+</h2>  
+<div class="box">To establish DimeX as a globally recognized liquidity-driven staking platform focused on responsible growth, strong fundamentals, and long-term ecosystem sustainability.</div>  
+</section>  
+  
+<!-- CORE VALUES -->  
+<section class="section">  
+<h2 id="core">  
+<a href="#core">  
+<i class="fa-solid fa-shield icon"></i>  
+CORE VALUES  
+</a>  
+</h2>  
+  
+<div class="box">Security — Smart contract-based system ensuring transparency, reliability, and user protection.</div>  
+<div class="box">Liquidity Strength — Core focus on building strong liquidity as the foundation of stability.</div>  
+<div class="box">Sustainability — Structured reward model designed for long-term ecosystem health.</div>  
+<div class="box">Transparency — All operations are verifiable on-chain for full user visibility.</div>  
+<div class="box">Community Participation — User activity directly contributes to ecosystem growth and liquidity strength.</div>  
+</section>
+  
+<!-- WHY STAKING -->  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-coins icon"></i>  
+WHY STAKING?  
+</h2>  
+  
+<p class="subText">  
+DimeX staking is designed with a liquidity-first approach to strengthen market stability and support long-term token value.  
+</p>  
+  
+<div class="glassCard">  
+  
+<ul class="tick">  
+<li>Users can stake USDT or DMX within the platform</li>  
+<li>Staked assets contribute directly to liquidity growth</li>  
+<li>Liquidity is integrated into market pools to improve stability</li>  
+<li>Stronger liquidity helps reduce volatility and build confidence</li>  
+<li>Participants receive rewards for supporting the ecosystem</li>  
+</ul>  
+  
+</div>  
+  
+<p class="subText">  
+This model creates a structured cycle where user participation strengthens liquidity, and stronger liquidity supports long-term token stability and growth.  
+</p>  
+  
+</section>  
+  
+<!-- HOW REWARDS WORK -->  
+<section class="section">  
+  
+<h2 class="goldTitle" id="rewards">  
+<i class="fa-solid fa-gift icon"></i>  
+HOW REWARDS WORK  
+</h2>  
+  
+<p class="subText">  
+Participants who stake receive rewards in DMX based on their contribution and staking duration.  
+</p>  
+  
+<div class="glassCard">  
+  
+<ul class="tick">  
+<li>Rewards can be held for long-term value</li>  
+<li>Swapped through decentralized exchanges like PancakeSwap</li>  
+<li>Converted into other supported assets</li>  
+<li>Re-staked to compound earnings over time</li>  
+</ul>  
+  
+</div>  
+  
+<p class="subText">  
+This flexible reward system allows users to manage their earnings based on individual strategies while supporting ecosystem growth.  
+</p>  
+  
+</section>  
+  
+<!-- LIQUIDITY STRATEGY -->  
+<section class="section">  
+  
+<h2 class="goldTitle" id="liquidity">  
+<i class="fa-solid fa-water icon"></i>  
+LIQUIDITY STRATEGY  
+</h2>  
+  
+<div class="glassCard">  
+  
+<ul class="tick">  
+<li>Strengthens overall token stability and market structure</li>  
+<li>Improves user confidence and ecosystem reliability</li>  
+<li>Supports sustainable long-term value growth</li>  
+<li>Creates a foundation for future exchange listings and expansion</li>  
+  
+</ul>  
+  
+</div>  
+  
+</section>
+  
+<!-- HERO / MAIN TOP BANNER -->  
+<section class="section">  
+  <div class="fullBanner">  
+    <img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/blockchain.png">  
+  </div>  
+</section>  
+  
+<!-- STAKING PROGRAM -->  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-coins icon"></i>  
+Staking Program  
+</h2>  
+  
+<div class="underInfo goldBox">  
+  
+<div class="row">  
+<i class="fa-solid fa-dollar-sign smallIcon"></i>  
+Minimum Stake : <b class="gold">2500 DMX</b>  
+</div>  
+  
+<div class="row">  
+<i class="fa-solid fa-coins smallIcon"></i>  
+Minimum Restake : <b class="gold">100 DMX + 5% Bonus</b>  
+</div>  
+  
+<div class="row">  
+<i class="fa-solid fa-wallet smallIcon"></i>  
+Minimum Claim : <b class="gold">100 DMX</b>  
+</div>   
+  
+<table>  
+<tr>  
+<th>Duration</th>  
+<th>Daily</th>  
+<th>Total</th>  
+</tr>  
+  
+<tr>  
+<td>90 days</td>  
+<td>0.20%</td>  
+<td>18%</td>  
+</tr>  
+  
+<tr>  
+<td>180 days</td>  
+<td>0.25%</td>  
+<td>45%</td>  
+</tr>  
+  
+<tr>  
+<td>365 days</td>  
+<td>0.30%</td>  
+<td>109%</td>  
+</tr>  
+</table>  
+  
+</div>  
+  
+<!-- RETURN POLICY -->  
+<div class="underInfo goldBox" style="margin-top:14px;">  
+<b class="goldHead">Staking Return Policy</b><br>  
+  
+✔ After each staking duration ends, your staked <b class="gold">DMX</b> will be returned to your wallet.<br>  
+  
+✔ Staking rewards are paid daily in <b class="gold">DMX</b> and can be claimed anytime.  
+  
+</div>  
+  
+<!-- PAYMENT & CLAIM OPTIONS -->  
+<div class="underInfo goldBox" style="margin-top:14px;">  
+  
+<b class="goldHead">Payment & Claim Options</b>  
+  
+<ul class="infoList">  
+  
+<li>  
+<b>Staking Mode:</b><br>  
+✔ Stake using <span class="gold">DMX</span><br>  
+✔ Stake using <span class="gold">USDT (Converted to DMX Value)</span>  
+</li>  
+  
+<li>  
+<b>Reward System:</b><br>  
+All rewards are generated in <span class="gold">DMX</span>  
+</li>  
+  
+<li>  
+<b>Claim Options:</b><br>  
+✔ Claim in <span class="gold">DMX (Direct)</span><br>  
+✔ Claim in <span class="gold">USDT (Auto Converted)</span>  
+</li>  
+  
+<li>  
+<b>Flexibility:</b><br>  
+Users can choose claim type anytime based on their strategy  
+</li>  
+  
+</ul>  
+  
+</div>  
+  
+</section>  
+  
+  <div class="underInfo goldBox" style="margin-top:14px;">  
+  
+<b class="goldHead">Reward Calculator</b>  
+  
+<input id="stakeAmount"  
+type="number"  
+placeholder="Enter DMX amount"  
+class="contractInput">  
+  
+<select id="stakeDays" class="contractInput">  
+<option value="90">90 Days (0.20%)</option>  
+<option value="180">180 Days (0.25%)</option>  
+<option value="365">365 Days (0.30%)</option>  
+</select>  
+  
+<button onclick="calcReward()" class="copyBtn" style="margin-top:10px;">  
+Calculate  
+</button>  
+  
+<div style="margin-top:10px;">  
+Daily: <span id="dailyReward" class="gold">0</span> DMX<br>  
+Total: <span id="totalReward" class="gold">0</span> DMX  
+</div>  
+  
+  </div>  
+  
+  
+<!-- DIRECT REFERRAL -->  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-user-plus icon"></i>  
+Direct Referral 10%  
+</h2>  
+  
+<div class="underInfo goldBox">  
+  
+<p class="subText">  
+<b class="gold">Paid from user deposit</b>  
+</p>  
+  
+<div class="levelCard">  
+  
+<div class="tableHead" style="color:gold;margin-bottom:6px;">  
+Example  
+</div>  
+  
+<table>  
+<tr>  
+<th>User stakes</th>  
+<th>Referrer receives</th>  
+</tr>  
+  
+<tr>  
+<td>10,000 DMX</td>  
+<td class="gold">1,000 DMX</td>  
+</tr>  
+</table>  
+  
+</div>  
+</div>  
+  
+</section>  
+  
+  <!-- TEAM BONUS (PLACE BETWEEN DIRECT & LEVEL INCOME) -->  
+  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-users icon"></i>  
+Team Bonus (5 Levels - 2%)  
+</h2>  
+  
+<div class="goldBox">  
+  
+<p class="subText">  
+Earn <b class="gold">2%</b> team bonus from <b>Level 1 to Level 5</b> based on your team staking (customer deposits).  
+</p>  
+  
+<ul class="infoList">  
+  
+<li><b>Condition:</b> Bonus is calculated from customer staking (deposit), not from rewards</li>  
+  
+<li><b>Level 1 Example:</b> Deposit 10,000 DMX → You earn 200 DMX</li>  
+  
+<li><b>Level 2 Example:</b> Deposit 6,000 DMX → You earn 120 DMX</li>  
+  
+<li><b>Level 3 Example:</b> Deposit 5,000 DMX → You earn 100 DMX</li>  
+  
+<li><b>Level 4 Example:</b> Deposit 3,000 DMX → You earn 60 DMX</li>  
+  
+<li><b>Level 5 Example:</b> Deposit 2,000 DMX → You earn 40 DMX</li>  
+  
+</ul>  
+  
+</div>  
+  
+</section>  
+<section class="section">  
+  
+<h2>  
+<i class="fa-solid fa-network-wired icon"></i>  
+Level Bonus   
+</h2>  
+  
+<div class="levelCard">  
+  
+<table>  
+<tr><th>Level</th><th>Bonus %</th></tr>  
+<tr><td>1</td><td>30%</td></tr>  
+<tr><td>2</td><td>15%</td></tr>  
+<tr><td>3</td><td>10%</td></tr>  
+<tr><td>4</td><td>7%</td></tr>  
+<tr><td>5</td><td>5%</td></tr>  
+<tr><td>6</td><td>4%</td></tr>  
+<tr><td>7</td><td>3%</td></tr>  
+<tr><td>8-10</td><td>2%</td></tr>  
+<tr><td>11-15</td><td>1%</td></tr>    
+<tr><td>16-20</td><td>0.5%</td></tr>  
+<tr><td>21-25</td><td>0.25%</td></tr>  
+</table>  
+  
+<div class="exampleBox goldExample">  
+  
+<span class="goldHead">Level Conditions</span>  
+  
+<ul class="infoList">  
+  
+<li><b>Calculation:</b> Level bonus is paid from REWARD POOL (Not from user deposits)</li>  
+  
+<li><b>Unlock Condition:</b> Minimum 10,000 DMX direct referral per month,    
+Resets every 30 days (Smart contract automated)</li>  
+  
+<li><b>Carry Forward:</b> Extra direct volume carries to next month</li>  
+  
+<li><b>Example:</b> 50,000 DMX → 10,000 DMX per month for 5 months</li>  
+  
+</ul>  
+  
+</div>  
+</section>  
+  
+ <section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-chart-line icon"></i>  
+Income Cap (4X Limit)  
+</h2>  
+  
+<div class="goldBox">  
+  
+<p class="subText">  
+To maintain sustainability, DimeX applies a <b class="gold">4X income cap</b>.  
+</p>  
+  
+<ul class="infoList">  
+  
+<li>You can earn up to <b>4 times</b> your total stake</li>  
+  
+<li>This includes:  
+Direct income + Level income + Team Bonus + Rewards</li>  
+  
+<li>Once 4X is reached, earnings will stop automatically</li>  
+  
+<li>Re-staking resets your earning cycle</li>  
+  
+</ul>  
+  
+</div>  
+  
+</section>   
+  
+<!-- DEFI VISUAL -->  
+<section class="section" style="padding:0;">  
+  <div class="fullBanner">  
+    <img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/defidmx.png">  
+  </div>  
+</section>  
+    
+<!-- SECURITY -->  
+<section class="section">  
+  
+<h2 class="goldTitle" id="security">  
+<i class="fa-solid fa-lock icon"></i>  
+SECURITY & TRANSPARENCY  
+</h2>  
+  
+<div class="glassCard">  
+  
+<ul class="tick">  
+<li>Smart contract-based architecture ensuring secure and automated operations</li>  
+<li>On-chain reward tracking with full transparency</li>  
+<li>All transactions verifiable on the blockchain</li>  
+<li>Decentralized participation without centralized control</li>  
+</ul>  
+  
+</div>  
+  
+</section>  
+    
+<!-- MARKETING ANALYTICS -->  
+<section class="section">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-chart-pie icon"></i>  
+Marketing Analytics  
+</h2>  
+  
+<div class="glassCard">  
+  
+<ul class="tick">  
+<li>Real-time ecosystem growth tracking</li>  
+<li>Community expansion and engagement metrics</li>  
+<li>Liquidity performance monitoring</li>  
+<li>Referral activity and participation insights</li>  
+<li>Overall ecosystem performance analysis</li>  
+</ul>  
+  
+</div>  
+  
+<p class="subText">  
+Marketing analytics provides insights into ecosystem performance, user participation, and long-term sustainability, helping guide future growth strategies.  
+</p>  
+  
+</section>  
+  
+<!-- TOKEN UTILITY -->  
+<section class="section">  
+  
+<h2 class="goldTitle" id="token">  
+<i class="fa-solid fa-cube icon"></i>  
+TOKEN UTILITY  
+</h2>  
+  
+<div class="glassCard">  
+  
+<ul class="tick">  
+<li>Access to staking and participation within the platform</li>  
+<li>Reward distribution across the ecosystem</li>  
+<li>Contribution to liquidity growth and market stability</li>  
+<li>Future utilities within the expanding DimeX ecosystem</li>  
+</ul>  
+  
+</div>  
+  
+</section>  
+  
+<!-- ROADMAP BANNER -->
+<section class="section" style="padding:0;">
+  <div class="fullBanner">
+    <img src="https://raw.githubusercontent.com/dimex1601-dev/Roadmap-/main/road.png">
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section">
+<h2 id="roadmap">
+<a href="#roadmap">
+<i class="fa-solid fa-road icon"></i>
+FUTURE ROADMAP
+</a>
+</h2>
+
+<div class="box">
+<h3 class="goldTitle">
+Phase 1 — Foundation
+</h3>
+<ul class="tick">
+<li>Project concept and system architecture</li>
+<li>Token deployment on BNB Smart Chain</li>
+<li>Website and platform setup</li>
+<li>Initial community onboarding</li>
+</ul>
+</div>
+
+<div class="box">
+<h3 class="goldTitle">
+Phase 2 — Ecosystem Activation
+</h3>
+<ul class="tick">
+<li>Staking system launch</li>
+<li>Liquidity pool setup and increase</li>
+<li>Membership system activation</li>
+<li>Early user growth and engagement</li>
+</ul>
+</div>
+
+<div class="box">
+<h3 class="goldTitle">
+Phase 3 — Market Expansion
+</h3>
+<ul class="tick">
+<li>Token trading (Buy & Sell enabled)</li>
+<li>Liquidity optimization and growth</li>
+<li>Marketing expansion and visibility</li>
+<li>Strategic partnerships</li>
+</ul>
+</div>
+
+<div class="box">
+<h3 class="goldTitle">
+Phase 4 — Growth & Utility
+</h3>
+<ul class="tick">
+<li>Platform feature expansion</li>
+<li>Utility development and use cases</li>
+<li>Ecosystem growth and scaling</li>
+<li>Long-term value building</li>
+</ul>
+</div>
+
+<div class="box">
+<h3 class="goldTitle">
+Phase 5 — DimeX Native Ecosystem
+</h3>
+<ul class="tick">
+<li>DimeX native coin development (own blockchain coin like BNB / ETH)</li>
+<li>Full platform ecosystem launch</li>
+<li>Multi-utility integration</li>
+<li>Future expansion and innovation</li>
+</ul>
+</div>
+
+</section>
+    
+<!-- CONTRACT PANEL -->  
+<div class="section">  
+<div class="box" style="max-width:700px;margin:auto;text-align:center;">  
+  
+<h2 class="goldTitle">  
+<i class="fa-solid fa-file-contract icon"></i>  
+Smart Contracts  
+</h2>  
+  
+<!-- DMX TOKEN -->  
+<h3 class="goldTitle">DMX Token Contract</h3>    
+<input id="dmxAddress"   
+value="0x0eb5dc6af3dbd9f6d10f50c363b61c8714f497e6"   
+readonly class="contractInput">    
+  
+<div class="contractActions">    
+<a href="https://bscscan.com/address/0x0eb5dc6af3dbd9f6d10f50c363b61c8714f497e6"   
+target="_blank" class="scanBtn">🔗 View on BscScan</a>    
+  
+<button onclick="copyText('dmxAddress')" class="copyBtn">📋 Copy</button>    
+</div>    
+  
+  
+<!-- STAKING -->  
+<h3 class="goldTitle" style="margin-top:25px;">Staking Contract</h3>    
+<input id="stakeAddress"   
+value="0x0d164DaDFaCCDff1B5eAa43E242936F5E6fbF7Aa"   
+readonly class="contractInput">    
+  
+<div class="contractActions">    
+<a href="https://bscscan.com/address/0x0d164DaDFaCCDff1B5eAa43E242936F5E6fbF7Aa"   
+target="_blank" class="scanBtn">🔗 View on BscScan</a>    
+  
+<button onclick="copyText('stakeAddress')" class="copyBtn">📋 Copy</button>    
+</div>    
+  
+  
+<!-- LP -->  
+<h3 class="goldTitle" style="margin-top:25px;">Liquidity Pair (LP)</h3>    
+<input id="lpAddress"   
+value="0x181a45e81720300285be2f94a48b06a8115937d8"   
+readonly class="contractInput">    
+  
+<div class="contractActions">    
+<a href="https://bscscan.com/address/0x181a45e81720300285be2f94a48b06a8115937d8"   
+target="_blank" class="scanBtn">🔗 View on BscScan</a>    
+  
+<button onclick="copyText('lpAddress')" class="copyBtn">📋 Copy</button>    
+</div>  
+</div>  
+    
+<!-- FUTURE OUTLOOK -->  
+<section class="section">  
+  
+<h2 class="goldTitle" id="future">  
+<i class="fa-solid fa-chart-line icon"></i>  
+Future Outlook  
+</h2>  
+  
+<div class="glassCard">  
+  
+<p>  
+DimeX is structured with a long-term vision focused on sustainable ecosystem growth.  
+As liquidity strengthens and user participation increases, the platform aims to expand its utility, improve market presence, and integrate with broader DeFi infrastructure.  
+</p>  
+  
+<p>  
+The roadmap is designed to prioritize stability, gradual scaling, and continuous development to ensure long-term value creation.  
+</p>  
+  
+</div>  
+</section>  
+    
+<!-- 🔥 TEAM -->
+<section class="section">
+
+<h2 class="goldTitle">
+<i class="fa-solid fa-users icon"></i>
+TEAM
+</h2>
+
+<div class="box" style="text-align:center">
+
+<!-- PROFILE IMAGE -->
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/vishalpandey.jpg"
+     alt="Vishal Pandey"
+     style="width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid #d4af37;">
+
+<h3 style="margin-top:15px;color:#fff;">
+Vishal Pandey
+</h3>
+
+<p style="color:#d4af37;font-weight:bold;">
+Project Director – DimeX Chain Ecosystem
+</p>
+
+<p style="font-size:13px;color:#aaa;line-height:1.7;">
+Vishal Pandey serves as Project Director of DimeX Chain Ecosystem, overseeing project strategy, ecosystem development, community engagement, and long-term growth initiatives. He works closely with the development team to support blockchain innovation, platform expansion, and sustainable ecosystem adoption.
+</p>
+
+<!-- LINKEDIN -->
+<p style="margin-top:10px;">
+<a href="https://www.linkedin.com/in/vishal-pandey-416239406"
+   target="_blank"
+   style="font-size:13px;">
+🔗 View LinkedIn Profile
+</a>
+</p>
+
+<!-- 🎥 VIDEO -->
+<h3 style="color:#d4af37;margin-top:25px;">
+🎥 Staking Demo Video
+</h3>
+
+<iframe width="100%" height="315"
+src="https://www.youtube.com/embed/qaRbDY9a-PM?si=I3OTdycQ9unhGpdE"
+title="DimeX Staking Demo"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen
+style="border-radius:10px;">
+</iframe>
+
+<p style="margin-top:10px;">
+<a href="https://youtu.be/qaRbDY9a-PM?si=I3OTdycQ9unhGpdE"
+target="_blank"
+style="display:inline-block;
+padding:10px 12px;
+background:#d4af37;
+color:#000;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;">
+▶ Watch Video
+</a>
+</p>  
+
+<!-- DEVELOPMENT PROFILE -->
+<p style="margin-top:8px;">
+<a href="https://github.com/dimex1601-dev/DimeX---Profile-"
+   target="_blank"
+   style="font-size:13px;">
+🔗 View Development Profile
+</a>
+</p>
+
+<!-- WHITEPAPER -->
+<p style="margin-top:8px;">
+<a href="https://raw.githubusercontent.com/dimex1601-dev/DimeX---Profile-/main/DimeX%20(DMX)%20%20Whitepaper.pdf"
+   target="_blank"
+   style="font-size:13px;">
+📄 View Whitepaper
+</a>
+</p>
+
+</div>
+
+</section>
+  
+<!-- CONTACT -->  
+<section class="section">  
+<h2 id="contact">  
+<a href="#contact">  
+<i class="fa-solid fa-envelope icon"></i>  
+CONTACT  
+</a>  
+</h2>  
+
+<div class="box">  
+
+<p>  
+<i class="fa-solid fa-envelope icon"></i>  
+<a href="mailto:info@dimex.world">info@dimex.world</a>  
+</p>  
+
+<p>  
+<i class="fa-solid fa-globe icon"></i>  
+<a href="https://dimex.world" target="_blank">www.dimex.world</a>  
+</p>  
+
+<p>  
+<i class="fa-brands fa-telegram icon"></i>  
+<a href="https://t.me/dimexofficial" target="_blank">Official Telegram Channel</a>  
+</p>  
+
+<p>  
+<i class="fa-brands fa-x-twitter icon"></i>  
+<a href="https://twitter.com/DimeXGlobal" target="_blank">Official Twitter</a>  
+</p>  
+
+<p style="font-size:12px;color:#888;margin-top:10px;">
+For official updates, announcements, and support, please use the above communication channels only.
+</p>
+
+</div>  
+</section>  
+
+<div class="footer">© 2026 DimeX. All rights reserved.</div>
+  <script>  
+window.enter = async function(){
+
+  try{
+
+    await modal.open();
+
+  }catch(err){
+
+    console.log(err);
+
+  }
+
+}
+
+window.addEventListener("load", function(){
+  
+// ===== PRICE TICKER =====  
+async function loadPrices(){  
+try{  
+let res = await fetch(  
+"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1"  
+);  
+  
+let data = await res.json();  
+let txt = "";  
+  
+data.slice(0,50).forEach(c=>{  
+txt += `${c.symbol.toUpperCase()} $${c.current_price} • `;  
+});  
+  
+document.getElementById("tickerText").innerHTML = txt;  
+  
+}catch(e){  
+console.log("API temporary block");  
+}  
+}  
+  
+loadPrices();  
+setInterval(loadPrices,60000);  
+  
+  
+// ===== SLIDER =====  
+let slides;  
+  
+if(window.innerWidth <= 768){  
+slides = document.querySelectorAll(".slide.mobile");  
+}else{  
+slides = document.querySelectorAll(".slide.desktop");  
+}  
+  
+if(!slides.length) return;  
+  
+slides[0].classList.add("active");  
+  
+let i = 0;  
+  
+setInterval(()=>{  
+slides[i].classList.remove("active");  
+i = (i + 1) % slides.length;  
+slides[i].classList.add("active");  
+},3500);  
+  
+// 🔥 LOADER HIDE CODE  
+const loader = document.getElementById("loader");  
+if(loader){  
+  setTimeout(()=>{  
+    loader.style.opacity="0";  
+    setTimeout(()=>{  
+      loader.style.display="none";  
+    },600);  
+  },1200);  
+}  
+  
+});     
+  
+// 🔥 PWA INSTALL SUPPORT  
+let deferredPrompt;  
+  
+window.addEventListener('beforeinstallprompt', (e) => {  
+  e.preventDefault();  
+  deferredPrompt = e;  
+  console.log("Install ready");  
+});  
+  
+// 🔥 INSTALL FUNCTION  
+function installApp(){  
+  if(deferredPrompt){  
+    deferredPrompt.prompt();  
+  
+    deferredPrompt.userChoice.then((choiceResult) => {  
+      if(choiceResult.outcome === 'accepted'){  
+        console.log("User installed app");  
+      } else {  
+        console.log("User cancelled install");  
+      }  
+      deferredPrompt = null;  
+    });  
+  
+  } else {  
+    alert("📲 Please open in Chrome and install the app");
+  }
+
+}
+  
+// 🔥 SERVICE WORKER REGISTER  
+window.addEventListener("load", () => {  
+  if ('serviceWorker' in navigator) {  
+    navigator.serviceWorker.register('/sw.js')  
+    .then(() => console.log("Service Worker Registered"))  
+    .catch(() => console.log("SW Failed"));  
+  }  
+});  
+  
+function calcReward(){  
+  
+const amt = parseFloat(document.getElementById("stakeAmount").value);  
+const days = parseInt(document.getElementById("stakeDays").value);  
+  
+if(!amt){  
+alert("Enter amount");  
+return;  
+}  
+  
+let rate = 0;  
+  
+if(days === 90) rate = 0.002;  
+if(days === 180) rate = 0.0025;  
+if(days === 365) rate = 0.003;  
+  
+const daily = amt * rate;  
+const total = daily * days;  
+  
+document.getElementById("dailyReward").innerText = daily.toFixed(2);  
+document.getElementById("totalReward").innerText = total.toFixed(2);  
+  
+}    
+  
+</script>  <!-- ✅ THIS LINE ADD -->  
+  
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+  
+<script>  
+window.addEventListener("load", () => {  
+  
+const ctx2 = document.getElementById('growthChart');  
+  
+if(!ctx2) return;  
+  
+new Chart(ctx2, {  
+type: 'line',  
+data: {  
+labels: [  
+'Launch',  
+'1 Month',  
+'3 Months',  
+'6 Months',  
+'9 Months',  
+'12 Months'  
+],  
+datasets: [{  
+label: 'Projected Growth',  
+data: [0.001, 0.003, 0.008, 0.02, 0.05, 0.1],  
+borderColor: '#00ff99',  
+backgroundColor: 'rgba(0,255,153,0.08)',  
+tension: 0.45,  
+fill: true,  
+pointRadius: 4,  
+pointBackgroundColor: '#00ff99'  
+}]  
+},  
+options: {  
+responsive: true,  
+plugins: {  
+legend: {  
+labels: { color: '#fff' }  
+}  
+},  
+scales: {  
+x: {  
+ticks: { color: '#aaa' }  
+},  
+y: {  
+ticks: { color: '#aaa' }  
+}  
+}  
+}  
+});  
+  
+});  
+  
+function copyText(id){  
+    const el = document.getElementById(id);  
+    navigator.clipboard.writeText(el.value);  
+  
+    // smooth message  
+    const msg = document.getElementById("txMessageBox");  
+    if(msg){  
+        msg.style.display = "block";  
+        msg.innerText = "Copied successfully";  
+  
+        setTimeout(()=>{  
+            msg.style.display = "none";  
+        },1500);  
+    }  
+  }    
+  
+     
+</script>  
+<script type="module">
+
+import { createAppKit } from 'https://esm.sh/@reown/appkit?bundle'
+import { EthersAdapter } from 'https://esm.sh/@reown/appkit-adapter-ethers?bundle'
+import { bsc } from 'https://esm.sh/@reown/appkit/networks?bundle'
+
+window.modal = createAppKit({
+  adapters:[new EthersAdapter()],
+  networks:[bsc],
+  defaultNetwork:bsc,
+  projectId:'1885ad435015158bf203263156175c91',
+  metadata:{
+    name:'DimeX',
+    description:'DimeX',
+    url:'https://www.dimex.world/Dash/',
+    icons:['https://i.ibb.co/HpqwGFqt/logo.png']
+  }
+});
+
+</script>
+  
+</body>  
+</html>
