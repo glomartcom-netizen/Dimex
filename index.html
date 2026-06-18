@@ -1538,10 +1538,19 @@ function copyText(id){
 
 <style>
 
+.wgrid{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+max-width:340px;
+margin:auto;
+}
+
 .wbtn{
-width:110px;
-margin:6px;
-padding:12px;
+width:100px;
+height:100px;
+padding:10px;
 border:none;
 border-radius:14px;
 background:#1e293b;
@@ -1550,6 +1559,11 @@ font-size:12px;
 font-weight:bold;
 cursor:pointer;
 transition:.3s;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 }
 
 .wbtn:hover{
@@ -1559,7 +1573,8 @@ background:#2563eb;
 .wbtn img{
 width:42px;
 height:42px;
-margin-bottom:6px;
+object-fit:contain;
+margin-bottom:8px;
 }
 
 </style>
@@ -1640,41 +1655,41 @@ panel.innerHTML=`
 Select Wallet
 </h3>
 
-<div>
+<div class="wgrid">
 
 <button onclick="openTrust()" class="wbtn">
-<img src="https://registry.walletconnect.org/v2/logo/md/0528ee15-16cc-46c0-82e9-49cfd5d17b00">
-<br>Trust Wallet
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/trustwallet-removebg-preview.png">
+Trust Wallet
 </button>
 
 <button onclick="openMetaMask()" class="wbtn">
-🦊
-<br>MetaMask
+<div style="font-size:42px;">🦊</div>
+MetaMask
 </button>
 
 <button onclick="openCoinbase()" class="wbtn">
-<img src="https://registry.walletconnect.org/v2/logo/md/4622a2b2-6d5d-4f7e-93a6-d0a2e2e6a9c9">
-<br>Coinbase
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/coinbase-removebg-preview.png">
+Coinbase
 </button>
 
 <button onclick="openTokenPocket()" class="wbtn">
-<img src="https://registry.walletconnect.org/v2/logo/md/f2bb4050-503e-4fa3-8fa2-91ef4ab67c00">
-<br>TokenPocket
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/tokenpocket-removebg-preview.png">
+TokenPocket
 </button>
 
 <button onclick="openImToken()" class="wbtn">
-<img src="https://registry.walletconnect.org/v2/logo/md/8f5b9d66-5dba-4e8f-bc4d-1f4ffef6c96f">
-<br>imToken
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/imtoken-removebg-preview.png">
+imToken
 </button>
 
 <button onclick="openMathWallet()" class="wbtn">
-<img src="https://registry.walletconnect.org/v2/logo/md/c57ca95b-4f4d-48c6-8c1c-2a4f6d7d6a6e">
-<br>MathWallet
+<img src="https://raw.githubusercontent.com/glomartcom-netizen/Dimexhome/main/mathwallet-removebg-preview%20(1).png">
+MathWallet
 </button>
 
 <button onclick="copyDashUrl()" class="wbtn">
-🌐
-<br>Other Wallet
+<div style="font-size:42px;">🌐</div>
+Other Wallet
 </button>
 
 </div>
@@ -1684,6 +1699,9 @@ margin-top:15px;
 font-size:12px;
 color:#aaa;
 line-height:1.7;
+max-width:320px;
+margin-left:auto;
+margin-right:auto;
 ">
 
 ✔ Other Wallet Users
